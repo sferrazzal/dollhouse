@@ -3,14 +3,19 @@ from .models import Background
 from .models import Doll
 
 def index(request):
+    return render(request, 'house/index.html')
+
+def new_image(request):
+  return render(request, 'house/new_image.html', context)
+
+def dollhouse(request):
     bg_object = Background.objects.get(bg_name='lake')
     bg_image = bg_object.bg_image
     doll_object = Doll.objects.get(doll_name='cinders')
     doll_image = doll_object.doll_image
     context = {'bg_image': bg_image, 'doll_image': doll_image}
-    return render(request, 'house/index.html', context)
+    return render(request, 'house/dollhouse.html', context)
 
-def new_image(request):
-  return render(request, 'house/new_image.html', context)
+
 
 # Create your views here.

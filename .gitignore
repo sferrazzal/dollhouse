@@ -1,3 +1,7 @@
+# VI swap files
+*.swp
+
+# Database
 db.sqlite3
 
 # Byte-compiled / optimized / DLL files
