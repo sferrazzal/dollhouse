@@ -1,6 +1,40 @@
 $(document).ready(function() {
     console.log("js ready!");
 
+    //get csrftoken
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                console.log(i);
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+
+    console.log(csrftoken);
+
+    function csrfSafeMethod(method) {
+        //these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFTOKEN", csrftoken);
+            }
+        }
+    });
+
     //create reference to item being dragged
     var draggeditem = null;
     
@@ -65,6 +99,7 @@ $(document).ready(function() {
     $(document).click(function(){
        console.log(draggeditem)
        console.log(mouse_x)
+       console.log(mouse_y)
     });
     
     function drag(){

@@ -21,6 +21,8 @@ class Dollhouse(models.Model):
 class Doll(models.Model):
     doll_name = models.CharField(max_length=100)
     doll_image = models.ImageField(max_length=100)
+    doll_lpos = models.CharField(max_length=10)
+    doll_tpos = models.CharField(max_length=10)
     dollhouse = models.ForeignKey(Dollhouse)
     def __str__(self):
         return self.doll_name
@@ -28,6 +30,8 @@ class Doll(models.Model):
 class Accessory(models.Model):
     accessory_name = models.CharField(max_length=100)
     accessory_image = models.ImageField(max_length=100)
+    accessory_lpos = models.CharField(max_length=10)
+    accessory_tops = models.CharField(max_length=10)
     dollhouse = models.ForeignKey(Dollhouse)
     def __str__(self):
         return self.accessory_name
