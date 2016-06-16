@@ -5,11 +5,11 @@
 <script type="text/javascript" src="{% static 'house/dollhouse.js' %}"></script>
 
 <div class="background">
-    <img src="{{ MEDIA_URL }}{{ bg_image }}" alt="Background" style="position:absolute; top:0; left:0;"/> 
+    <img src="{{ MEDIA_URL }}{{ workingdollhouse.dh_background.bg_image }}" alt="Background" style="position:absolute; top:0; left:0;"/> 
 </div>
 
-<div class="doll">
-    <img src="{{ MEDIA_URL }}{{ doll_image }}" alt="Doll" draggable="false" style="position:relative; top:54; left:100;"/>
+{% for doll in doll_objects %}
+    <div class="doll">
+        <img src="{{ MEDIA_URL }}{{ doll.doll_image }}" alt="Doll" draggable="false" style="position:relative; top:54; left:100;"/>
 </div>
-
-{{ MEDIA_URL }}{{ doll_image }}
+{% endfor %}

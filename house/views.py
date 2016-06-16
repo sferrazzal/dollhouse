@@ -10,15 +10,12 @@ def new_image(request):
   return render(request, 'house/new_image.html', context)
 
 def dollhouse(request):
-    # this needs to be replaced to load whichever dollhouse the user specifies:
+    # this needs to be replaced to load whichever dollhouse the user specifies.
+    # Make it URL based?
     workingdollhouse = Dollhouse.objects.get(id=1)
-    #endcomment.
 
-    bg_object = workingdollhouse.dh_background 
-    bg_image = bg_object.bg_image
-    doll_object = Doll.objects.get(dollhouse=workingdollhouse)
-    doll_image = doll_object.doll_image
-    context = {'dollhouse': workingdollhouse, 'bg_image': bg_image, 'doll_image': doll_image}
+    doll_objects = Doll.objects.filter(dollhouse=workingdollhouse)
+    context = {'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse}
     return render(request, 'house/dollhouse.html', context)
 
     
