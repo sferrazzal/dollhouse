@@ -14,8 +14,9 @@ def dollhouse(request):
     # Make it URL based?
     workingdollhouse = Dollhouse.objects.get(id=1)
 
+    doll_z = 0 
     doll_objects = Doll.objects.filter(dollhouse=workingdollhouse)
-    context = {'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse}
+    context = {'doll_z': doll_z, 'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse}
     return render(request, 'house/dollhouse.html', context)
 
     

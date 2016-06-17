@@ -64,15 +64,16 @@ $(document).ready(function() {
     function move(e){
         mouse_x = e.pageX
         mouse_y = e.pageY
-        //console.log("The one that got away!")
-        //$(this).css('opacity',0)
         if(draggeditem != null){
             console.log(draggeditem)
             console.log("left " + draggeditem.style.left)
-            draggeditem.style.left = e.pageX - offset_x
+            draggeditem.style.left = mouse_x - offset_x
+            console.log("mouse_x - offset_x = " + mouse_x + " - " + offset_x + " = " + Number(mouse_x - offset_x))
             console.log("left " + draggeditem.style.left)
             console.log("top " + draggeditem.style.top)
-            draggeditem.style.top = e.pageY - offset_y 
+            console.log("mouse_y - offset_y = " + mouse_y + " - " + offset_y + " = " + Number(mouse_y - offset_y))
+            draggeditem.style.top = mouse_y - offset_y 
+            console.log("mouse_y - offset_y = " + mouse_y + " - " + offset_y + " = " + Number(mouse_y - offset_y))
             console.log("top " + draggeditem.style.top)
         }
     };
@@ -92,8 +93,6 @@ $(document).ready(function() {
         offset_y = (Number(mouse_y) - Number(draggeditem.offsetTop))
         console.log("offset_x = " + offset_x)
         console.log("offset_y = " + offset_y)
-        //console.log("...or is she?")
-        //$(this).css('opacity',1)
     });
 
     $(document).click(function(){
@@ -105,6 +104,5 @@ $(document).ready(function() {
     function drag(){
         console.log("It works!")
     }
-
     
 })
