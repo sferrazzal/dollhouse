@@ -11,9 +11,8 @@
 
 {% for doll in doll_objects %}
     <div class="doll">
-        <img src="{{ MEDIA_URL }}{{ doll.doll_image }}" alt="Doll" draggable="false" style="position:absolute; top:54; left:100;"/>
+        <img src="{{ MEDIA_URL }}{{ doll.doll_image }}" alt="Doll" draggable="false" data-dollid="{{ doll.id }}" style="position:absolute; top:{{ doll.doll_tpos }}; left:{{ doll.doll_lpos }};"/>
 </div>
-{{ doll_z|add:"1" }}
 
 {% endfor %}
 <br>

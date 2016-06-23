@@ -7,7 +7,6 @@ $(document).ready(function() {
         if (document.cookie && document.cookie != '') {
             var cookies = document.cookie.split(';');
             for (var i = 0; i < cookies.length; i++) {
-                console.log(i);
                 var cookie = jQuery.trim(cookies[i]);
                 if (cookie.substring(0, name.length + 1) == (name + '=')) {
                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
@@ -19,8 +18,6 @@ $(document).ready(function() {
     }
 
     var csrftoken = getCookie('csrftoken');
-
-    console.log(csrftoken);
 
     function csrfSafeMethod(method) {
         //these HTTP methods do not require CSRF protection
@@ -50,59 +47,43 @@ $(document).ready(function() {
     var offset_x = 0;
     var offset_y = 0;
 
-
-//    function updateposition(f){
-//        var mouse_x = f.pageX
-//        var mouse_y = f.pageY
-//       console.log(mouse_x)
-//        console.log(mouse_y)
-//    }
-
+    //update draggeditem on mouse move
     $(document).mousemove(move);
-
-
     function move(e){
         mouse_x = e.pageX
         mouse_y = e.pageY
         if(draggeditem != null){
-            console.log(draggeditem)
-            console.log("left " + draggeditem.style.left)
             draggeditem.style.left = mouse_x - offset_x
-            console.log("mouse_x - offset_x = " + mouse_x + " - " + offset_x + " = " + Number(mouse_x - offset_x))
-            console.log("left " + draggeditem.style.left)
-            console.log("top " + draggeditem.style.top)
-            console.log("mouse_y - offset_y = " + mouse_y + " - " + offset_y + " = " + Number(mouse_y - offset_y))
             draggeditem.style.top = mouse_y - offset_y 
-            console.log("mouse_y - offset_y = " + mouse_y + " - " + offset_y + " = " + Number(mouse_y - offset_y))
-            console.log("top " + draggeditem.style.top)
         }
     };
 
+    //on mouseup, post position of draggeditem to server and clear draggeditem
     $(document).mouseup(function(){
+        var dollid = draggeditem.dataset.dollid
+        var lpos = draggeditem.style.left
+        var tpos = draggeditem.style.top
+        $.ajax("http://127.0.0.1:8000/dollhouse/doll/"+dollid, {
+            type: 'POST',
+            dataType: "json",
+            data: {
+                lpos: lpos,
+                tpos: tpos,            
+            }
+        })
+        .done(function(response){
+            console.log("The request is complete!" );
+        })
+        .fail(function() {
+            console.log("Sorry, there was a problem!");
+        })
         draggeditem = null
     });
 
+    //set draggeditem on mousedown and set offsets
     $(".doll").mousedown(function(){
         draggeditem = $(this).find("img").get(0)
-        console.log(draggeditem)
-        console.log("mouse x = " + mouse_x)
-        console.log("mouse y = " + mouse_y)
-        console.log("offset left = " + draggeditem.offsetLeft)
-        console.log("offset top = " + draggeditem.offsetTop)
         offset_x = (Number(mouse_x) - Number(draggeditem.offsetLeft))
         offset_y = (Number(mouse_y) - Number(draggeditem.offsetTop))
-        console.log("offset_x = " + offset_x)
-        console.log("offset_y = " + offset_y)
     });
-
-    $(document).click(function(){
-       console.log(draggeditem)
-       console.log(mouse_x)
-       console.log(mouse_y)
-    });
-    
-    function drag(){
-        console.log("It works!")
-    }
-    
 })
