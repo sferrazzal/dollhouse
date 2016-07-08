@@ -1,0 +1,42 @@
+{% load static %}
+{% load staticfiles %}
+<html>
+<!DOCTYPE html>
+  <head>
+    <link rel="stylesheet" type="text/css" href='{% static 'house/dressing_room.css' %}'.>
+  </head>
+
+  <body>
+
+  <div id="container">
+
+  <div id="banner"><center>Welcome to the dressing room for {{ workingdollhouse.dollhouse_name }}!</center>
+  </div>
+
+
+      <div id="sidebar">
+        <br>
+        Select a working doll: 
+        <select>
+            <option value="null">Select Doll</option>
+                {% for doll in doll_objects %}
+                <option value="{{ doll.doll_id }}">{{ doll.doll_name }} </option>
+                {% endfor %}
+        </select>
+        <br>
+        <br>
+        Preview available dolls:
+        <br>
+        <br>
+        Create a new doll: 
+      </div>
+
+      <div id="display_area">
+          <img id="curtains" src = {% static "house/images/curtains.jpg" %} alt="curtains"/>
+          <img id="standby" src = {% static "house/images/please_stand_by.jpg" %} alt="stand_by"/>
+      </div>
+
+    </div>
+
+  </body>
+</html>

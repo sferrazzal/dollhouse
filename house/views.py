@@ -11,10 +11,8 @@ def index(request):
 def new_image(request):
   return render(request, 'house/new_image.html', context)
 
-def dollhouse(request):
-    # this needs to be updated to load whichever dollhouse the user specifies.
-    workingdollhouse = Dollhouse.objects.get(id=1)
-
+def dollhouse(request, dollhouse):
+    workingdollhouse = Dollhouse.objects.get(id=dollhouse)
     doll_objects = Doll.objects.filter(dollhouse=workingdollhouse)
     context = {'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse}
     return render(request, 'house/dollhouse.html', context)
@@ -29,3 +27,9 @@ def doll(request, dollid):
         workingdoll.save()
         jsondata = json.dumps({'lpos': lpos, 'tpos': tpos})
         return JsonResponse({'lpos': lpos, 'tpos': tpos})
+
+def dressing_room(request, dollhouse):
+    workingdollhouse = Dollhouse.objects.get(id=dollhouse)
+    doll_objects = Doll.objects.filter(dollhouse=workingdollhouse)
+    context = {'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse}
+    return render(request, 'house/dressing_room.html', context)
