@@ -1,12 +1,22 @@
+<!DOCTYPE html>
 {% load static %}
 {% load staticfiles %}
 <html>
-<!DOCTYPE html>
   <head>
     <link rel="stylesheet" type="text/css" href='{% static 'house/dressing_room.css' %}'.>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'house/dressing_room.js' %}"></script>
+    <title>Dressing Room</title>
   </head>
 
   <body>
+
+  {% for doll in doll_objects %}
+      <div class="doll">
+          <img style="display:none" src="{{ MEDIA_URL }}{{ doll.doll_image }}" alt="{{ doll.doll_name }}" draggable="false" data-dollid="{{ doll.id }}"/>
+              </div>
+
+  {% endfor %}
 
   <div id="container">
 
@@ -17,7 +27,8 @@
       <div id="sidebar">
         <br>
         Select a working doll: 
-        <select>
+        <br>
+        <select id="dollselect">
             <option value="null">Select Doll</option>
                 {% for doll in doll_objects %}
                 <option value="{{ doll.doll_id }}">{{ doll.doll_name }} </option>
@@ -25,15 +36,12 @@
         </select>
         <br>
         <br>
-        Preview available dolls:
-        <br>
-        <br>
-        Create a new doll: 
+        <button type="button" id="button-newdoll">Create a new Doll</button>
       </div>
 
       <div id="display_area">
-          <img id="curtains" src = {% static "house/images/curtains.jpg" %} alt="curtains"/>
-          <img id="standby" src = {% static "house/images/please_stand_by.jpg" %} alt="stand_by"/>
+          <img id="curtains" src ={% static "house/images/curtains.jpg" %} alt="curtains"/>
+          <img id="focus" src ={% static "house/images/please_stand_by.jpg" %} alt="focus" draggable = "false" />
       </div>
 
     </div>

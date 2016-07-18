@@ -27,6 +27,11 @@ class Doll(models.Model):
     def __str__(self):
         return self.doll_name
 
+class DollPicture(models.Model):
+    picture = models.ImageField(max_length=100) 
+    def __str__(self):
+        return self.picture
+
 class Accessory(models.Model):
     accessory_name = models.CharField(max_length=100)
     accessory_image = models.ImageField(max_length=100)
@@ -35,5 +40,12 @@ class Accessory(models.Model):
     dollhouse = models.ForeignKey(Dollhouse)
     def __str__(self):
         return self.accessory_name
+    class Meta:
+        verbose_name_plural = "accessories"
+
+class AccessoryPicture(models.Model):
+    picture = models.ImageField(max_length=100)
+    def __str__(self):
+        return self.picture
 
 # Create your models here.
