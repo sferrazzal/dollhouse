@@ -29,8 +29,9 @@ class Doll(models.Model):
 
 class DollPicture(models.Model):
     picture = models.ImageField(max_length=100) 
+    name = models.CharField(max_length=100)
     def __str__(self):
-        return self.picture
+        return str(self.picture)
 
 class Accessory(models.Model):
     accessory_name = models.CharField(max_length=100)
@@ -45,7 +46,9 @@ class Accessory(models.Model):
 
 class AccessoryPicture(models.Model):
     picture = models.ImageField(max_length=100)
+    name = models.CharField(max_length=100)
     def __str__(self):
-        return self.picture
+        return str(self.picture)
+ 
 
 # Create your models here.

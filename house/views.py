@@ -3,6 +3,9 @@ from django.http import JsonResponse
 from .models import Background 
 from .models import Doll
 from .models import Dollhouse
+from .models import Accessory
+from .models import DollPicture
+from .models import AccessoryPicture
 import json
 
 def index(request):
@@ -31,5 +34,6 @@ def doll(request, dollid):
 def dressing_room(request, dollhouse):
     workingdollhouse = Dollhouse.objects.get(id=dollhouse)
     doll_objects = Doll.objects.filter(dollhouse=workingdollhouse)
-    context = {'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse}
+    accessorypicture_objects = AccessoryPicture.objects.all()
+    context = {'accessorypicture_objects': accessorypicture_objects, 'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse}
     return render(request, 'house/dressing_room.html', context)
