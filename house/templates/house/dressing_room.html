@@ -15,7 +15,6 @@
       <div class="doll">
           <img style="display:none" src="{{ MEDIA_URL }}{{ doll.doll_image }}" alt="{{ doll.doll_name }}" draggable="false" data-dollid="{{ doll.id }}"/>
       </div>
-
   {% endfor %}
 
   <div id="container">
@@ -35,7 +34,18 @@
       </select>
       <br>
       <br>
-      <button type="button" id="button-new-doll">Create New Doll</button>
+        <select id="doll-picture-select">
+          <option value="null">Preview Doll</option>
+          {% for dollpicture in dollpicture_objects %}
+            <option value="{{ MEDIA_URL }}{{ dollpicture.picture }}">{{ dollpicture.name }} </option>
+          {% endfor %}
+        </select>
+
+      <div id="doll-preview-box">
+        Doll Preview
+        <button type="button" id="button-new-doll">Create New Doll</button>
+      </div>
+ 
     </div>
 
       <div id="display-area">

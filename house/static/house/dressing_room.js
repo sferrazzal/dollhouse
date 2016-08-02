@@ -2,10 +2,10 @@ $(document).ready(function(){
     console.log("Document ready!");
 
   var dollSelectBox = document.getElementById("doll-select");
-  var accessorySelectBox = document.getElementById("accessory-select");
+  var accessoryPreviewBox = document.getElementById("accessory-select");
+
   var focus = document.getElementById("focus");
   var accessory = new Image();
-  var accessoryCreated = 0;
   var accessoryBox = document.getElementById("accessory-box");
 
   //Set and position doll image based on user selection 
@@ -20,10 +20,10 @@ $(document).ready(function(){
   //Set and position accessory preview based on user selection
   $(window).load(function(){
       console.log("Window loaded!");
-  accessorySelectBox.onchange=function(){
-    if (accessorySelectBox.selectedIndex != 0) {
-      selectedAccessoryPath = accessorySelectBox.options[accessorySelectBox.selectedIndex].value;
-      if (accessoryCreated == 0) {
+  accessoryPreviewBox.onchange=function(){
+    if (accessoryPreviewBox.selectedIndex != 0) {
+      selectedAccessoryPath = accessoryPreviewBox.options[accessoryPreviewBox.selectedIndex].value;
+        if (accessory.src == "") {
         accessory.src = selectedAccessoryPath;
         $( "#accessory-box" ).append(accessory);
         console.log("loop accessory height = " + accessory.clientHeight);
@@ -36,13 +36,12 @@ $(document).ready(function(){
         if (accessory.clientWidth > accessoryBox.clientWidth) {
             console.log("It's too big horizontally!");
         };
-        accessoryCreated = 1;
       } else {
           accessory.src = selectedAccessoryPath;
-        if (accessory.style.height > accessorySelectBox.style.height) {
+        if (accessory.style.height > accessoryPreviewBox.style.height) {
             console.log("It's too big vertically!");
         };
-        if (accessory.style.width > accessorySelectBox.style.width) {
+        if (accessory.style.width > accessoryPreviewBox.style.width) {
             console.log("It's too big horizontally!");
         };
       };
@@ -51,4 +50,39 @@ $(document).ready(function(){
     };
   };
   });
+  //set and position doll preview based on user selection
+  $(window).load(function(){
+      console.log("Window loaded!");
+  accessoryPreviewBox.onchange=function(){
+    if (accessoryPreviewBox.selectedIndex != 0) {
+      selectedAccessoryPath = accessoryPreviewBox.options[accessoryPreviewBox.selectedIndex].value;
+      if (accessory.src == "") {
+        console.log(accessory.src);
+        accessory.src = selectedAccessoryPath;
+        $( "#accessory-box" ).append(accessory);
+        console.log("loop accessory height = " + accessory.clientHeight);
+        console.log("loop accessory width = " + accessory.clientWidth);
+        console.log("loop box height = " + accessoryBox.clientHeight);
+        console.log("loop box width = " + accessoryBox.clientWidth);
+        if (accessory.clientHeight > accessoryBox.clientHeight) {
+            console.log("It's too big vertically!");
+        };
+        if (accessory.clientWidth > accessoryBox.clientWidth) {
+            console.log("It's too big horizontally!");
+        };
+      } else {
+          accessory.src = selectedAccessoryPath;
+        if (accessory.style.height > accessoryPreviewBox.style.height) {
+            console.log("It's too big vertically!");
+        };
+        if (accessory.style.width > accessoryPreviewBox.style.width) {
+            console.log("It's too big horizontally!");
+        };
+      };
+      console.log("Height = " + accessory.clientHeight);
+      console.log("Width = " + accessory.clientWidth);
+    };
+  };
+  });
+
 });

@@ -33,7 +33,9 @@ def doll(request, dollid):
 
 def dressing_room(request, dollhouse):
     workingdollhouse = Dollhouse.objects.get(id=dollhouse)
+    accessory_objects = Accessory.objects.filter(dollhouse=workingdollhouse)
     doll_objects = Doll.objects.filter(dollhouse=workingdollhouse)
+    dollpicture_objects = DollPicture.objects.all()
     accessorypicture_objects = AccessoryPicture.objects.all()
-    context = {'accessorypicture_objects': accessorypicture_objects, 'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse}
+    context = {'dollpicture_objects': dollpicture_objects, 'accessorypicture_objects': accessorypicture_objects, 'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse}
     return render(request, 'house/dressing_room.html', context)
