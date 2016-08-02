@@ -17,72 +17,69 @@ $(document).ready(function(){
       focus.style.bottom = "0%";
     };
   };
+
   //Set and position accessory preview based on user selection
-  $(window).load(function(){
-      console.log("Window loaded!");
   accessoryPreviewBox.onchange=function(){
     if (accessoryPreviewBox.selectedIndex != 0) {
       selectedAccessoryPath = accessoryPreviewBox.options[accessoryPreviewBox.selectedIndex].value;
         if (accessory.src == "") {
-        accessory.src = selectedAccessoryPath;
-        $( "#accessory-box" ).append(accessory);
-        console.log("loop accessory height = " + accessory.clientHeight);
-        console.log("loop accessory width = " + accessory.clientWidth);
-        console.log("loop box height = " + accessoryBox.clientHeight);
-        console.log("loop box width = " + accessoryBox.clientWidth);
-        if (accessory.clientHeight > accessoryBox.clientHeight) {
-            console.log("It's too big vertically!");
-        };
-        if (accessory.clientWidth > accessoryBox.clientWidth) {
-            console.log("It's too big horizontally!");
-        };
-      } else {
+          accessory.src = selectedAccessoryPath;
+          $(accessory).load(function() {
+            $( "#accessory-box" ).append(accessory);
+            if (accessory.clientHeight > accessoryBox.clientHeight) {
+              console.log("Resizing vertically!");
+              accessory.height = (accessoryBox.clientHeight - 10);
+            };
+            if (accessory.clientWidth > accessoryBox.clientWidth) {
+              console.log("Resizing horizontally!");
+              accessory.width = (accessoryBox.clientWidth - 10); 
+            };
+          });
+     } else {
           accessory.src = selectedAccessoryPath;
         if (accessory.style.height > accessoryPreviewBox.style.height) {
-            console.log("It's too big vertically!");
+          console.log("Resizing vertically!");
+          accessory.height = (accessoryBox.clientHeight - 10);
         };
         if (accessory.style.width > accessoryPreviewBox.style.width) {
-            console.log("It's too big horizontally!");
+          console.log("Resizing horizontally!");
+          accessory.width = (accessoryBox.clientWidth- 10);
         };
       };
       console.log("Height = " + accessory.clientHeight);
       console.log("Width = " + accessory.clientWidth);
     };
   };
-  });
   //set and position doll preview based on user selection
-  $(window).load(function(){
-      console.log("Window loaded!");
-  accessoryPreviewBox.onchange=function(){
-    if (accessoryPreviewBox.selectedIndex != 0) {
-      selectedAccessoryPath = accessoryPreviewBox.options[accessoryPreviewBox.selectedIndex].value;
-      if (accessory.src == "") {
-        console.log(accessory.src);
-        accessory.src = selectedAccessoryPath;
-        $( "#accessory-box" ).append(accessory);
-        console.log("loop accessory height = " + accessory.clientHeight);
-        console.log("loop accessory width = " + accessory.clientWidth);
-        console.log("loop box height = " + accessoryBox.clientHeight);
-        console.log("loop box width = " + accessoryBox.clientWidth);
-        if (accessory.clientHeight > accessoryBox.clientHeight) {
-            console.log("It's too big vertically!");
-        };
-        if (accessory.clientWidth > accessoryBox.clientWidth) {
-            console.log("It's too big horizontally!");
-        };
-      } else {
-          accessory.src = selectedAccessoryPath;
-        if (accessory.style.height > accessoryPreviewBox.style.height) {
-            console.log("It's too big vertically!");
-        };
-        if (accessory.style.width > accessoryPreviewBox.style.width) {
-            console.log("It's too big horizontally!");
-        };
-      };
-      console.log("Height = " + accessory.clientHeight);
-      console.log("Width = " + accessory.clientWidth);
-    };
-  };
-  });
+//  accessoryPreviewBox.onchange=function(){
+//    if (accessoryPreviewBox.selectedIndex != 0) {
+//      selectedAccessoryPath = accessoryPreviewBox.options[accessoryPreviewBox.selectedIndex].value;
+//      if (accessory.src == "") {
+//        console.log(accessory.src);
+//        accessory.src = selectedAccessoryPath;
+//        $( "#accessory-box" ).append(accessory);
+//        console.log("loop accessory height = " + accessory.clientHeight);
+//        console.log("loop accessory width = " + accessory.clientWidth);
+//        console.log("loop box height = " + accessoryBox.clientHeight);
+//        console.log("loop box width = " + accessoryBox.clientWidth);
+//        if (accessory.clientHeight > accessoryBox.clientHeight) {
+//            console.log("It's too big vertically!");
+//        };
+//        if (accessory.clientWidth > accessoryBox.clientWidth) {
+//            console.log("It's too big horizontally!");
+//        };
+//      } else {
+//          accessory.src = selectedAccessoryPath;
+//        if (accessory.style.height > accessoryPreviewBox.style.height) {
+//            console.log("It's too big vertically!");
+//        };
+//        if (accessory.style.width > accessoryPreviewBox.style.width) {
+//            console.log("It's too big horizontally!");
+//        };
+//      };
+//      console.log("Height = " + accessory.clientHeight);
+//      console.log("Width = " + accessory.clientWidth);
+//    };
+//  };
 
 });
