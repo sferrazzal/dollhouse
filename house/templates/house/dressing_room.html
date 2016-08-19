@@ -38,6 +38,9 @@
       </select>
       <br>
       <br>
+      <button type="button" id="button-rename-doll">Rename Selected Doll</button>
+      <br>
+      <br>
       Select a doll to preview:
         <select id="doll-picture-select">
           <option value="null">Preview Doll</option>
@@ -45,9 +48,6 @@
           <option data-picture="{{dollpicture.picture}}" value="{{ dollpicture.id }}">{{ dollpicture.name }} </option>
           {% endfor %}
         </select>
-        <br>
-        <br>
-        <button type="button" id="button-rename-doll">Rename Doll</button>
 
 
       <div id="doll-preview-box">

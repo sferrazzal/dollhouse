@@ -159,8 +159,8 @@ $(document).ready(function(){
     if (dollSelectMenu.selectedIndex != 0) {
       var dollId = dollSelectMenu.selectedIndex;
       console.log(dollId);
-      var dollName = prompt('Please enter a new name for this doll:');
-      if (dollName != '') {
+      var dollName = prompt('Please enter a new name for this doll (page will be reloaded):');
+      if (dollName != null) {
         // data will be set using setattr(); keys must be the model field name.
         $.ajax("Http://127.0.0.1:8000/dollhouse/doll/"+dollId,{
           type: 'POST',
@@ -168,6 +168,7 @@ $(document).ready(function(){
             doll_name: dollName,
           }
         });
+        window.location.reload(true);
       }; 
     };
   };
