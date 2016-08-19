@@ -90,9 +90,9 @@ html {
     padding:0;
 }
 
-#display-area #focus {
+#display-area #doll {
     position:absolute;
-    bottom:40%;
+    bottom:0%;
     left:37%;
     z-index:0;
     border:black;
@@ -108,7 +108,7 @@ html {
     margin:0;
 }
 
-#accessory-box {
+#accessory-preview-box {
     position:absolute;
     height:33%;
     width:100%;

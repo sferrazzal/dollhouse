@@ -5,6 +5,10 @@
   <head>
     <link rel="stylesheet" type="text/css" href='{% static 'house/dressing_room.css' %}'.>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+      var mediaUrl = "{{MEDIA_URL}}"
+      var workingDollhouse = {{workingdollhouse.id}}
+    </script>
     <script type="text/javascript" src="{% static 'house/dressing_room.js' %}"></script>
     <title>Dressing Room</title>
   </head>
@@ -34,12 +38,17 @@
       </select>
       <br>
       <br>
+      Select a doll to preview:
         <select id="doll-picture-select">
           <option value="null">Preview Doll</option>
           {% for dollpicture in dollpicture_objects %}
-            <option value="{{ MEDIA_URL }}{{ dollpicture.picture }}">{{ dollpicture.name }} </option>
+          <option data-picture="{{dollpicture.picture}}" value="{{ dollpicture.id }}">{{ dollpicture.name }} </option>
           {% endfor %}
         </select>
+        <br>
+        <br>
+        <button type="button" id="button-rename-doll">Rename Doll</button>
+
 
       <div id="doll-preview-box">
         Doll Preview
@@ -50,23 +59,34 @@
 
       <div id="display-area">
         <img id="curtains" src ={% static "house/images/curtains.jpg" %} alt="curtains"/>
-        <img id="focus" src ={% static "house/images/please_stand_by.jpg" %} alt="focus" draggable = "false" />
       </div>
 
     <div id="right-sidebar">
-      <select id="accessory-select">
+      <br>
+      Select a working accessory:
+        <select id="accessory-select">
+          <option value="null">Select Accessory</option>
+          {% for accessory in accessory_objects %}
+            <option value="{{ MEDIA_URL }}{{ accessory.accessory_id }}">{{ dollpicture.name }} </option>
+          {% endfor %}
+        </select>
+        <br>
+        <br>
+
+
+      Select an accessory to preview:
+      <select id="accessory-picture-select">
         <option value="null">Preview Accessory</option>
           {% for accessorypicture in accessorypicture_objects %}
           <option value="{{ MEDIA_URL }}{{ accessorypicture.picture }}">{{ accessorypicture.name }} </option>
           {% endfor %}
       </select>
 
-      <div id="accessory-box">
+      <div id="accessory-preview-box">
         Accessory Preview
         <button type="button" id="button-new-accessory">Create New Accessory</button>
       </div>
     </div>
-
   </div>
 
   </body>

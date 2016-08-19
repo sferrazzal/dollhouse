@@ -63,16 +63,17 @@ $(document).ready(function() {
         var dollid = draggeditem.dataset.dollid
         var lpos = draggeditem.style.left
         var tpos = draggeditem.style.top
+        //data will be set using setattr(); keys must be the model field name.
         $.ajax("http://127.0.0.1:8000/dollhouse/doll/"+dollid, {
             type: 'POST',
-            dataType: "json",
             data: {
-                lpos: lpos,
-                tpos: tpos,            
+                doll_lpos: lpos,
+                doll_tpos: tpos,            
             }
         })
         .done(function(response){
             console.log("The request is complete!" );
+            console.log(response);
         })
         .fail(function() {
             console.log("Sorry, there was a problem!");
