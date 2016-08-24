@@ -48,6 +48,10 @@ $(document).ready(function(){
 
 
   //Set and position doll image based on user selection 
+
+  // These event listeners should be added using addEventListener or
+  // jQuery. This syntax has the unfortunate problem that you can only
+  // have one event at a time.
   dollSelectMenu.onchange=function(){
     if (dollSelectMenu.selectedIndex != 0) {
       var selectedDollID = dollSelectMenu.selectedIndex;
