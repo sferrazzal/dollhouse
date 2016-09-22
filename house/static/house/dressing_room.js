@@ -15,7 +15,7 @@ $(document).ready(function(){
   var dollPreviewBox = document.getElementById("accessory-preview-box");
   var displayArea = document.getElementById("display-area");
   var previewedDoll = null;
-  var accessories = document.getElementsByClassName("accessory");
+  var $accessories = $("img[data-linkeddoll]");
   var workingDoll = null;
 
 
@@ -50,6 +50,7 @@ $(document).ready(function(){
           }
       }
   });
+
 
   //Show doll image and linked accessories based on user selection
   dollSelectMenu.onchange=function(){
@@ -313,6 +314,7 @@ $(document).ready(function(){
     offset_y = (Number(mouse_y) - Number(draggeditem.offsetTop));
   });
 
+  //
   $(document).mouseup(function(){
     if(draggeditem != null){
       var linkedDollId = draggeditem.dataset.linkeddoll
