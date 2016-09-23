@@ -9,8 +9,10 @@ from .models import DollPicture
 from .models import AccessoryPicture
 import json
 
-def index(request):
-    return render(request, 'house/index.html')
+def lobby(request):
+    dollhouses = Dollhouse.objects.all()
+    context = {'dollhouses': dollhouses}
+    return render(request, 'house/lobby.html', context)
 
 
 def new_image(request):

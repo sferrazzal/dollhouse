@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+{% load staticfiles %}
+
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'house/lobby.css' %}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'house/lobby.js' %}"></script>
+        <title>Lobby</title>
+        </head>
+
+        <div id="banner"><center>Welcome to the lobby! Please choose a dollhouse.</center>
+        </div>
+
+        <body>
+
+        {% for workingdollhouse in dollhouses %}
+        <a href src="{% url 'dollhouse' dollhouse=workingdollhouse.id %}">{{workingdollhouse.dollhouse_name}}</a>
+        {% endfor %}
+
+        <img id="lobbyimage" src="{{MEDIA_URL}}lobby.jpg"></img>
+
+        </body>
+
+</html>
