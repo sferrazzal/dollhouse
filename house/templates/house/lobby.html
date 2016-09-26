@@ -16,7 +16,7 @@
         <body>
 
         {% for workingdollhouse in dollhouses %}
-        <a href src="{% url 'dollhouse' dollhouse=workingdollhouse.id %}">{{workingdollhouse.dollhouse_name}}</a>
+        <a href="{% url 'dollhouse' dollhouse=workingdollhouse.id %}">{{workingdollhouse.dollhouse_name}}</a>
         {% endfor %}
 
         <img id="lobbyimage" src="{{MEDIA_URL}}lobby.jpg"></img>
