@@ -51,15 +51,40 @@
  
     </div>
 
-      <div id="display-area">
-        <img id="curtains" src ={% static "house/images/curtains.jpg" %} alt="curtains"/>
-  {% for doll in doll_objects %}
-  <div><img style="position:absolute" class="hide" src="{{ MEDIA_URL }}{{ doll.doll_image }}" alt="{{ doll.doll_name }}" draggable="false" data-dollid="{{ doll.id }}"/>{% for accessory in doll.accessory_set.all %} <div><img class="hide" src="{{ MEDIA_URL }}{{ accessory.accessory_image }}" alt="{{ accessory.accessory_name }}" draggable="false" data-accessoryid="{{ accessory.id }}" data-linkeddoll="{{accessory.doll_id}}" style="position:absolute; left:{{ accessory.accessory_lpos }}; top:{{ accessory.accessory_tpos }}"/></div>
-  {% endfor %}
-  </div>
-  {% endfor %}
-
+  <div id="display-area">
+    <img 
+    id="curtains" 
+    src ={% static "house/images/curtains.jpg" %} 
+    alt="curtains"
+    />
+    {% for doll in doll_objects %}
+    <div 
+      class="dollcontainer">
+      <img 
+      class="hide" 
+      src="{{ MEDIA_URL }}{{ doll.doll_image }}" 
+      alt="{{ doll.doll_name }}" draggable="false" 
+      data-dollid="{{ doll.id }}"
+      />
+      {% for accessory in doll.accessory_set.all %}
+      <div 
+        class="accessorycontainer"
+        data-accessoryid="{{ accessory.id }}" 
+        style="position:absolute; 
+               left:{{ accessory.accessory_lpos }}; 
+               top:{{ accessory.accessory_tpos }}"
+        >
+        <img 
+        class="hide" 
+        src="{{ MEDIA_URL }}{{ accessory.accessory_image }}" 
+        alt="{{ accessory.accessory_name }}" draggable="false" 
+        data-linkeddoll="{{accessory.doll_id}}" 
+                />
       </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
 
     <div id="right-sidebar">
 

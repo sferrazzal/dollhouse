@@ -22,15 +22,21 @@ html {
     display: none;
 }
 
-.doll {
+.dollcontainer {
     position:absolute;
     bottom:0%;
     left:37%;
+}
+
+.doll {
     z-index:0;
 }
 
-.accessory {
+.accessorycontainer {
     position:absolute;
+}
+
+.accessory {
     cursor:move;
     cursor:grab;
     z-index:1;

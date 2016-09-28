@@ -15,7 +15,7 @@ $(document).ready(function(){
   var dollPreviewBox = document.getElementById("accessory-preview-box");
   var displayArea = document.getElementById("display-area");
   var previewedDoll = null;
-  var accessories = document.getElementsByClassName("accessory");
+  var $accessories = $("img[data-linkeddoll]");
   var workingDoll = null;
 
 
@@ -50,6 +50,25 @@ $(document).ready(function(){
           }
       }
   });
+
+  //load accessory positions
+  
+  $accessories.each(function() {
+    var workingaccessory = $(this)[0];
+    var linkedDollId = workingaccessory.dataset.linkeddoll;
+    var workingDoll = $("img[data-dollid='" + workingaccessory.dataset.linkeddoll + "']")[0];
+    console.log(workingaccessory);
+    console.log(workingDoll);
+    var dollLeft= $(workingDoll).offset().left;
+    var dollTop= $(workingDoll).offset().top;
+    console.log("dollLeft = " + dollLeft);
+    console.log("dollTop = " + dollTop);
+    workingaccessory.style.left = Number(dollLeft) + Number(workingaccessory.dataset.leftoffset);
+    workingaccessory.style.top = Number(dollTop) + Number(workingaccessory.dataset.topoffset);
+    console.log("Left position equals dollLeft: " + dollLeft + " plus offset: " + workingaccessory.dataset.leftoffset + " that's: " + (dollLeft + workingaccessory.dataset.leftoffset));
+    console.log("Top position equals dollTop: " + dollTop + " plus offset: " + workingaccessory.dataset.topoffset + " that's: " + (dollTop + workingaccessory.dataset.topoffset));
+  });
+
 
   //Show doll image and linked accessories based on user selection
   dollSelectMenu.onchange=function(){
@@ -306,13 +325,14 @@ $(document).ready(function(){
 
 
   //set draggeditem on mousedown and set offsets
-  $("img[data-linkeddoll]").mousedown(function(){
+  $(".accessorycontainer").mousedown(function(){
     draggeditem = $(this)[0];
     console.log(draggeditem);
     offset_x = (Number(mouse_x) - Number(draggeditem.offsetLeft));
     offset_y = (Number(mouse_y) - Number(draggeditem.offsetTop));
   });
 
+  //
   $(document).mouseup(function(){
     if(draggeditem != null){
       var linkedDollId = draggeditem.dataset.linkeddoll
