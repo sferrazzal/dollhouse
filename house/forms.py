@@ -4,6 +4,8 @@ from .models import AccessoryPicture
 from .models import Background
 
 class DollPictureForm(forms.ModelForm):
+    name = forms.CharField(label = 'New Doll Name', max_length=100)
+    picture = forms.FileField(label = 'New Doll Image')
 
     class Meta:
         model = DollPicture
