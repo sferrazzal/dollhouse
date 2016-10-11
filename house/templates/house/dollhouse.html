@@ -1,6 +1,6 @@
 {% load staticfiles %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'house/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'house/dollhouse.css' %}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="{% static 'house/dollhouse.js' %}"></script>
 
@@ -8,10 +8,33 @@
     <img src="{{ MEDIA_URL }}{{ workingdollhouse.dh_background.bg_image }}" alt="Background" style="position:absolute; top:0; left:0;"/> 
 </div>
 
-
-{% for doll in doll_objects %}
-    <div class="doll">
-        <img src="{{ MEDIA_URL }}{{ doll.doll_image }}" alt="Doll" draggable="false" data-dollid="{{ doll.id }}" style="position:absolute; top:{{ doll.doll_tpos }}; left:{{ doll.doll_lpos }};"/>
-</div>
-
-{% endfor %}
+   {% for doll in doll_objects %}
+    <div
+      style="position:absolute;
+             top:{{ doll.doll_tpos }};
+             left:{{ doll.doll_lpos }};"
+      class="dollcontainer"
+      data-dollid="{{ doll.id }}">
+      <img 
+      class="doll grabbable" 
+      src="{{ MEDIA_URL }}{{ doll.doll_image }}" 
+      alt="{{ doll.doll_name }}" draggable="false" 
+      />
+      {% for accessory in doll.accessory_set.all %}
+      <div 
+        class="accessorycontainer"
+        style="position:absolute; 
+               left:{{ accessory.accessory_lpos }}; 
+               top:{{ accessory.accessory_tpos }}"
+        >
+        <img 
+        class="accessory" 
+        src="{{ MEDIA_URL }}{{ accessory.accessory_image }}" 
+        alt="{{ accessory.accessory_name }}" draggable="false" 
+        data-accessoryid="{{ accessory.id }}" 
+        data-linkeddoll="{{accessory.doll_id}}" 
+                />
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}

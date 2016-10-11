@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+{% load staticfiles %}
+
+<html>
+
+  <head>
+    <link rel="stylesheet" type="text/css" href='{% static 'house/loading_dock.css' %}'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
+    <script type="text/javascript" src="{% static 'house/loading_dock.js' %}">
+    </script>
+    <title>Loading Dock</title>
+  </head>
+
+  <body>
+
+ 
+
+    <div id="page-container">
+
+      <div id="banner"><center>Welcome to the loading dock!</center>
+      </div> 
+
+      <div id="left-sidebar">
+      {% if form.errors %}
+          {% for field in form %}
+              {% for error in field.errors %}
+                  <div class="alert alert-danger">
+                      <strong style="color:white">{{ field.label_tag }}{{ error|escape }}</strong>
+                  </div>
+              {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+              <div color=white class="alert alert-danger">
+                  <strong color=white>Non-field:{{ field.label_tag }}{{ error|escape }}</strong>
+              </div>
+          {% endfor %}
+      {% endif %}
+
+       <div class="djangoform">
+            <form method="POST">{% csrf_token %}
+            {{dollform}}
+            <button class='upload' type="submit">Upload</button>
+          </form>
+        </div>
+        <div class="djangoform">
+            <form method="POST">{% csrf_token %}
+            {{accessoryform}}
+            <button class='upload' type="submit">Upload</button>
+          </form>
+       </div>
+        <div class="djangoform">
+            <form method="POST">{% csrf_token %}
+            {{backgroundform}}
+            <button class='upload' type="submit">Upload</button>
+          </form>
+      </div>
+      </div>
+
+      <div id="background">
+        <img
+          id="loading-dock"
+          src="{{MEDIA_URL}}loadingdock.jpg"
+          alt="loading-dock"
+        />
+      </div>
+
+    </div>
+
+  </body>
+
+</html>

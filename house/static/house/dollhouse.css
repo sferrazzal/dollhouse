@@ -1,0 +1,24 @@
+.background {
+    z-index:0;
+    width:100%;
+}
+
+.dollcontainer {
+    position:absolute;
+    cursor: grab;
+}
+
+.doll {
+    cursor: grab;
+    z-index:1;
+}
+
+.accessorycontainer {
+    position:absolute;
+}
+
+.grabbable {
+    cursor:-moz-grab;
+    cursor:-webkit-grab;
+    cursor:grab;
+}

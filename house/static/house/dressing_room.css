@@ -37,10 +37,16 @@ html {
 }
 
 .accessory {
-    cursor:move;
-    cursor:grab;
     z-index:1;
 }
+
+.grabbable {
+    cursor:-moz-grab;
+    cursor:-webkit-grab;
+    cursor:grab;
+}
+
+
 
 #container {
     position:absolute;

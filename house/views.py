@@ -7,6 +7,7 @@ from .models import Dollhouse
 from .models import Accessory
 from .models import DollPicture
 from .models import AccessoryPicture
+from .forms import * 
 import json
 
 def lobby(request):
@@ -14,17 +15,22 @@ def lobby(request):
     context = {'dollhouses': dollhouses}
     return render(request, 'house/lobby.html', context)
 
-
-def new_image(request):
-  return render(request, 'house/new_image.html', context)
-
-
 def dollhouse(request, dollhouse):
     workingdollhouse = Dollhouse.objects.get(id=dollhouse)
     doll_objects = Doll.objects.filter(dollhouse=workingdollhouse)
     context = {'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse}
     return render(request, 'house/dollhouse.html', context)
 
+def loading_dock(request):
+    form = DollPictureForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+    accessoryform = AccessoryPictureForm()
+    dollform = DollPictureForm()
+    backgroundform = BackgroundForm()
+    context = {'form': form, 'accessoryform': accessoryform, 'dollform': dollform, 'backgroundform': backgroundform}
+    return render(request, 'house/loading_dock.html', context)
 
 def doll(request, dollid):
     if request.method == 'POST':

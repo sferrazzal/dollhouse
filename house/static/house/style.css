@@ -1,9 +1,0 @@
-.background {
-    z-index:2;
-}
-
-.doll {
-    cursor:move;
-    cursor: grab;
-    z-index:1;
-}

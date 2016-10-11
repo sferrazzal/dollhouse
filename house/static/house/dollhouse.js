@@ -60,30 +60,33 @@ $(document).ready(function() {
 
     //on mouseup, post position of draggeditem to server and clear draggeditem
     $(document).mouseup(function(){
-        var dollid = draggeditem.dataset.dollid
-        var lpos = draggeditem.style.left
-        var tpos = draggeditem.style.top
-        //data will be set using setattr(); keys must be the model field name.
-        $.ajax("http://127.0.0.1:8000/dollhouse/doll/"+dollid, {
-            type: 'POST',
-            data: {
-                doll_lpos: lpos,
-                doll_tpos: tpos,            
-            }
-        })
-        .done(function(response){
-            console.log("The request is complete!" );
-            console.log(response);
-        })
-        .fail(function() {
-            console.log("Sorry, there was a problem!");
-        })
-        draggeditem = null
+        if(draggeditem != null){
+          var dollid = draggeditem.dataset.dollid
+          var lpos = draggeditem.style.left
+          var tpos = draggeditem.style.top
+          //data will be set using setattr(); keys must be the model field name.
+          $.ajax("http://127.0.0.1:8000/dollhouse/doll/"+dollid, {
+              type: 'POST',
+              data: {
+                  doll_lpos: lpos,
+                  doll_tpos: tpos,            
+              }
+          })
+          .done(function(response){
+              console.log("The request is complete!" );
+              console.log(response);
+          })
+          .fail(function() {
+              console.log("Sorry, there was a problem!");
+          })
+          draggeditem = null
+        };
     });
 
     //set draggeditem on mousedown and set offsets
-    $(".doll").mousedown(function(){
-        draggeditem = $(this).find("img").get(0)
+    $(".dollcontainer").mousedown(function(){
+        draggeditem = $(this)[0]
+        console.log(draggeditem)
         offset_x = (Number(mouse_x) - Number(draggeditem.offsetLeft))
         offset_y = (Number(mouse_y) - Number(draggeditem.offsetTop))
     });
