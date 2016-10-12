@@ -37,22 +37,26 @@
           {% endfor %}
       {% endif %}
 
-       <div class="djangoform">
-            <form method="POST">{% csrf_token %}
-            {{dollform}}
-            <button class='upload' type="submit">Upload</button>
+      <div class="djangoform">
+          <form enctype="multipart/form-data" method="POST">
+              <input type="hidden" name="FormType" value="DollPictureForm">
+              {% csrf_token %}
+              {{dollform}}
+              <button class='upload' type="submit">Upload</button>
           </form>
-        </div>
-        <div class="djangoform">
-            <form method="POST">{% csrf_token %}
-            {{accessoryform}}
-            <button class='upload' type="submit">Upload</button>
+      </div>
+      <div class="djangoform">
+          <form enctype="multipart/form-data" method="POST">{% csrf_token %}
+              <input type="hidden" name="FormType" value="AccessoryPictureForm">
+              {{accessoryform}}
+              <button class='upload' type="submit">Upload</button>
           </form>
-       </div>
-        <div class="djangoform">
-            <form method="POST">{% csrf_token %}
-            {{backgroundform}}
-            <button class='upload' type="submit">Upload</button>
+      </div>
+      <div class="djangoform">
+          <form enctype="multipart/form-data" method="POST">{% csrf_token %}
+              <input type="hidden" name="FormType" value="BackgroundForm">
+              {{backgroundform}}
+              <button class='upload' type="submit">Upload</button>
           </form>
       </div>
       </div>

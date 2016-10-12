@@ -28,7 +28,7 @@ class Doll(models.Model):
         return self.doll_name
 
 class DollPicture(models.Model):
-    picture = models.ImageField(max_length=100) 
+    picture = models.ImageField() 
     name = models.CharField(max_length=100)
     def __str__(self):
         return str(self.picture)

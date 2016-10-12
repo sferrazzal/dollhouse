@@ -130,12 +130,18 @@ html {
 
 #right-sidebar {
     position:relative;
+    z-index:-1;
     float:right;
     width:11%;
     height:96%;
     background-color:black;
     color:white;
     margin:0;
+}
+
+#recycle-bin {
+    width:auto;
+    height:auto;
 }
 
 #accessory-preview-box {

@@ -22,10 +22,29 @@ def dollhouse(request, dollhouse):
     return render(request, 'house/dollhouse.html', context)
 
 def loading_dock(request):
-    form = DollPictureForm(request.POST)
+    form = None
     if request.method == 'POST':
+        FormType = request.POST.get('FormType')
+        FormDict = {'DollPictureForm': DollPictureForm,
+                    'AccessoryPictureForm': AccessoryPictureForm,
+                    'BackgroundForm': BackgroundForm,
+                    }
+        cls = FormDict[FormType]
+        form = cls(request.POST, request.FILES)
+        print("matched class {}!".format(cls))
+
+
+    #print("formtype = {}!".format(FormType))
+    #for cls in (DollPictureForm, AccessoryPictureForm, BackgroundForm):
+    #    print("checking {}!".format(cls))
+    #    if cls.formtype == FormType:
+    #        form = cls(request.POST, request.FILES)
+    #        print("matched formtype {}!".format(cls))
+    #        break
+    #if request.method == 'POST':
         if form.is_valid():
             form.save()
+        else: print("it's not valid!")
     accessoryform = AccessoryPictureForm()
     dollform = DollPictureForm()
     backgroundform = BackgroundForm()

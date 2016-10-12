@@ -6,6 +6,7 @@ from .models import Background
 class DollPictureForm(forms.ModelForm):
     name = forms.CharField(label = 'New Doll Name', max_length=100)
     picture = forms.FileField(label = 'New Doll Image')
+    formtype = "DollPictureForm"
 
     class Meta:
         model = DollPicture
@@ -14,6 +15,7 @@ class DollPictureForm(forms.ModelForm):
 class AccessoryPictureForm(forms.ModelForm):
     name = forms.CharField(label = 'New Accessory Name', max_length=100)
     picture = forms.FileField(label = 'New Accessory Image')
+    formtype = "AccessoryPictureForm"
 
     class Meta:
         model = AccessoryPicture
@@ -22,6 +24,7 @@ class AccessoryPictureForm(forms.ModelForm):
 class BackgroundForm(forms.ModelForm):
     bg_name = forms.CharField(label = 'New Background Name', max_length=100)
     bg_image= forms.FileField(label = 'New Background Image')
+    formtype = "BackgroundForm"
 
     class Meta:
         model = Background 

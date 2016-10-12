@@ -354,4 +354,9 @@ $(document).ready(function(){
     };
   });
 
+
+  $("#recycle-bin").mouseup(function(){
+      console.log("Neato!")
+  });
+
 });
