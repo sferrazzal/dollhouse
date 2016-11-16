@@ -1,7 +1,32 @@
+body {
+    margin:0;
+}
+
+a {
+    color:red;
+    font-size:20px;
+}
+
+a:visited {
+    color:red;
+}
+
+.banner {
+    position:relative;
+    height:150px;
+    background-color:black;
+}
+
+.recycle-bin {
+    height:150px;
+    width:150px;
+    float:right;
+}
+
 .background {
     z-index:0;
     width:100%;
-    height:auto;
+    height:100%;
 }
 
 .dollcontainer {
@@ -22,4 +47,38 @@
     cursor:-moz-grab;
     cursor:-webkit-grab;
     cursor:grab;
+}
+
+#container {
+    position:relative;
+    height:100%;
+}
+
+#background-image {
+    width:100%;
+    height:100%;
+}
+
+#linkarea {
+    height:150px;
+    width:250px;
+    float:left;
+}
+
+#bannertext {
+    color:white;
+    float:left;
+    font-size:50px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+
+button {
+    margin:5px;
+}
+
+select {
+    margin:5px;
 }

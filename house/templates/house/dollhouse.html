@@ -4,8 +4,30 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="{% static 'house/dollhouse.js' %}"></script>
 
+<div class="banner"> 
+    <div id="linkarea">
+        <a href="{% url 'lobby' %}">Return to Lobby</a>
+        <br>
+        <a href="{% url 'dressing_room' dollhouse=workingdollhouse.id %}">Go to Dressing Room</a>
+        <br>
+        <button id="rename-dollhouse">Rename Dollhouse</button>
+        <select id="background-select">
+          <option value="null">Change Background</option>
+            {% for background in background_objects %}
+            <option value="{{ background.bg_name}}">{{ background.bg_name }} </option>
+            {% endfor %}
+        </select>
+		<button id="rename-background">Rename Background</button>
+    </div>
+    <div id="bannertext">{{ workingdollhouse.dollhouse_name }}</div>
+    <div class="recycle-bin">
+        <img class="recycle-bin" src={% static "house/images/recycle_bin.png" %} alt="Recycle Bin"/>
+    </div>
+</div>
+
+<div id="container">
 <div class="background">
-    <img src="{{ MEDIA_URL }}{{ workingdollhouse.dh_background.bg_image }}" alt="Background" style="position:absolute; top:0; left:0;"/> 
+    <img id="background-image" src="{{ MEDIA_URL }}{{ workingdollhouse.dh_background.bg_image }}" alt="Background" style="position:absolute; top:0; left:0;"/> 
 </div>
 
    {% for doll in doll_objects %}
@@ -38,3 +60,4 @@
       {% endfor %}
     </div>
     {% endfor %}
+</div>

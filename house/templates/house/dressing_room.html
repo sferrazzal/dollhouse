@@ -17,7 +17,7 @@
 
   <div id="container">
 
-  <div id="banner"><center>Welcome to the dressing room for {{ workingdollhouse.dollhouse_name }}!</center>
+      <div id="banner"><div id="returnlink"><a href="{% url 'dollhouse' dollhouse=workingdollhouse.id %}">Return to dollhouse</a></div> <div id="bannertext">Welcome to the dressing room for {{ workingdollhouse.dollhouse_name }}!</div>
   </div>
 
     <div id="right-sidebar">

@@ -18,7 +18,8 @@ def lobby(request):
 def dollhouse(request, dollhouse):
     workingdollhouse = Dollhouse.objects.get(id=dollhouse)
     doll_objects = Doll.objects.filter(dollhouse=workingdollhouse)
-    context = {'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse}
+    background_objects = Background.objects.all()
+    context = {'doll_objects': doll_objects, 'workingdollhouse': workingdollhouse, 'background_objects': background_objects}
     return render(request, 'house/dollhouse.html', context)
 
 def loading_dock(request):
@@ -61,6 +62,7 @@ def doll(request, dollid):
         return HttpResponse("success!")
 
 def accessory(request, accessoryid):
+    debug;
     if request.method == 'POST':
         workingaccessory = Accessory.objects.get(id=accessoryid)
         if request.POST.get('erase') == "true":

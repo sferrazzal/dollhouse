@@ -18,6 +18,18 @@ html {
     left: 0;
 }
 
+a:visited {
+    color:red;
+}
+
+#returnlink {
+    position:absolute;
+}
+
+#bannertext {
+    text-align:center;
+}
+
 .hide {
     display: none;
 }
@@ -99,7 +111,7 @@ html {
 #display-area {
     position:relative;
     float:left;
-    width:calc(100% - 280px);
+    width:calc(100% - 280px); /* fixme - inline-block might be a better solutionfor this page layout. */
     height:94%;
     margin:0;
     padding:0;
