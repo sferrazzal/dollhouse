@@ -17,10 +17,11 @@ $(document).ready(function(){
   var previewedDoll = null;
   var $accessories = $("img[data-linkeddoll]");
   var workingDoll = null;
+  var inrecyclebin = false;
 
 
 
-  //get csrftoken
+  //csrftoken setup
   function getCookie(name) {
       var cookieValue = null;
       if (document.cookie && document.cookie != '') {
@@ -50,25 +51,7 @@ $(document).ready(function(){
           }
       }
   });
-
-  //load accessory positions
-  
-  $accessories.each(function() {
-    var workingaccessory = $(this)[0];
-    var linkedDollId = workingaccessory.dataset.linkeddoll;
-    var workingDoll = $("img[data-dollid='" + workingaccessory.dataset.linkeddoll + "']")[0];
-    console.log(workingaccessory);
-    console.log(workingDoll);
-    var dollLeft= $(workingDoll).offset().left;
-    var dollTop= $(workingDoll).offset().top;
-    console.log("dollLeft = " + dollLeft);
-    console.log("dollTop = " + dollTop);
-    workingaccessory.style.left = Number(dollLeft) + Number(workingaccessory.dataset.leftoffset);
-    workingaccessory.style.top = Number(dollTop) + Number(workingaccessory.dataset.topoffset);
-    console.log("Left position equals dollLeft: " + dollLeft + " plus offset: " + workingaccessory.dataset.leftoffset + " that's: " + (dollLeft + workingaccessory.dataset.leftoffset));
-    console.log("Top position equals dollTop: " + dollTop + " plus offset: " + workingaccessory.dataset.topoffset + " that's: " + (dollTop + workingaccessory.dataset.topoffset));
-  });
-
+  //end csrftoken setup
 
   //Show doll image and linked accessories based on user selection
   dollSelectMenu.onchange=function(){
@@ -297,29 +280,49 @@ $(document).ready(function(){
       }
   };
 
-  //on mouseup, post position of draggeditem to server and clear draggeditem
-  $(document).mouseup(function(){
+  //on mouseup, post position of draggeditem to server and clear draggeditem (or trigger deletion if in recycle bin)
+  $(document).mouseup(function(e){
     if(draggeditem != null){
-      var accessoryid = draggeditem.dataset.accessoryid
-      var accessory_lpos = draggeditem.style.left
-      var accessory_tpos = draggeditem.style.top
-      console.log("POSTing with accid = " + accessoryid + ", acclpos = " + accessory_lpos + ", acctpos = " + accessory_tpos);
-      //data will be set using setattr(); keys must be the model field name.
-      $.ajax("http://127.0.0.1:8000/dollhouse/accessory/"+accessoryid, {
-        type: 'POST',
-        data: {
-          accessory_lpos: accessory_lpos,
-          accessory_tpos: accessory_tpos,
-        }
-      })
-      .done(function(response){
-        console.log("The request is complete!" );
-        console.log(response);
-      })
-      .fail(function() {
-        console.log("Sorry, there was a problem!");
-      })
-      draggeditem = null
+      var accessoryid = draggeditem.dataset.accessoryid;
+      if(bincheck(e) != false){
+        var check = confirm("Are you sure you want to delete this accessory? Page will reload.");
+            if(check == true) {
+              $.ajax("http://127.0.0.1:8000/dollhouse/accessory/"+accessoryid, {
+                type: 'POST',
+                data: {erase: 'true'
+                }
+              })
+            .done(function(response){
+              console.log("The request is complete!" );
+              console.log(response);
+            })
+            .fail(function() {
+              console.log("Sorry, there was a problem!");
+            })
+            draggeditem = null
+            window.location.reload(true);
+            };
+      } else {
+          var accessory_lpos = draggeditem.style.left
+          var accessory_tpos = draggeditem.style.top
+          console.log("POSTing with accid = " + accessoryid + ", acclpos = " + accessory_lpos + ", acctpos = " + accessory_tpos);
+          //data will be set using setattr(); keys must be the model field name.
+          $.ajax("http://127.0.0.1:8000/dollhouse/accessory/"+accessoryid, {
+            type: 'POST',
+            data: {
+              accessory_lpos: accessory_lpos,
+              accessory_tpos: accessory_tpos,
+            }
+          })
+          .done(function(response){
+            console.log("The request is complete!" );
+            console.log(response);
+          })
+          .fail(function() {
+            console.log("Sorry, there was a problem!");
+          })
+          draggeditem = null
+        };
     };
   });
 
@@ -332,31 +335,20 @@ $(document).ready(function(){
     offset_y = (Number(mouse_y) - Number(draggeditem.offsetTop));
   });
 
-  //
-  $(document).mouseup(function(){
-    if(draggeditem != null){
-      var linkedDollId = draggeditem.dataset.linkeddoll
-      console.log("draggeditem.style.left = " + Number(draggeditem.style.left.slice(0, -2)));
-      console.log("draggeditem.style.top= " + Number(draggeditem.style.top.slice(0, -2)));
-      console.log("dragged item = " + draggeditem);
-      console.log(linkedDollId);
-      var dollLeft= $("img[data-dollid='" + linkedDollId + "']").offset().left;
-      console.log(dollLeft);
-      var dollTop= $("img[data-dollid='" + linkedDollId + "']").offset().top;
-      console.log(dollTop);
-      var accessoryOffsetLeft = (Number(dollLeft) - Number(draggeditem.style.left.slice(0, -2)));
-      console.log("draggeditem.style.left = " + draggeditem.style.left);
-      console.log("accessoryOffsetLeft = " + accessoryOffsetLeft);
-      var accessoryOffsetTop = (Number(dollTop) - Number(draggeditem.style.top.slice(0, -2))); 
-      console.log("draggeditem.style.top= " + draggeditem.style.top);
-      console.log("accessoryOffsetTop = " + accessoryOffsetTop);
-      draggeditem = null;
-    };
-  });
-
-
-  $("#recycle-bin").mouseup(function(){
-      console.log("Neato!")
-  });
+  //check if mouse cursor is in bin
+  function bincheck(e){
+      var binoffset = $(".recycle-bin").offset();
+      var binwidth = $(".recycle-bin").width();
+      var binheight = $(".recycle-bin").height();
+      if (e.clientX > binoffset.left && 
+          e.clientX < (binoffset.left + binwidth) &&
+          e.clientY > binoffset.top &&
+          e.clientY < (binoffset.top + binheight)
+          ) {
+              return true;
+          } else {
+              return false;
+          };
+  };
 
 });

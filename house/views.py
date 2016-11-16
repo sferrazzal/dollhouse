@@ -63,11 +63,15 @@ def doll(request, dollid):
 def accessory(request, accessoryid):
     if request.method == 'POST':
         workingaccessory = Accessory.objects.get(id=accessoryid)
-        data = (request.POST).dict()
-        for key, value in data.items():
-            setattr(workingaccessory, key, value)
-        workingaccessory.save()
-        return HttpResponse("Accessory {} saved!".format(workingaccessory.accessory_name))
+        if request.POST.get('erase') == "true":
+            workingaccessory.delete()
+            return HttpResponse("Accessory deleted!")
+        else:
+            data = (request.POST).dict()
+            for key, value in data.items():
+                setattr(workingaccessory, key, value)
+            workingaccessory.save()
+            return HttpResponse("Accessory {} saved!".format(workingaccessory.accessory_name))
 
 def dollcreate(request):
     if request.method == 'POST':

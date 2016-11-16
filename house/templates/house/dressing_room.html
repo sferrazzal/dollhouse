@@ -20,6 +20,29 @@
   <div id="banner"><center>Welcome to the dressing room for {{ workingdollhouse.dollhouse_name }}!</center>
   </div>
 
+    <div id="right-sidebar">
+      <div id="right-sidebar-top">
+        Select an accessory to preview:
+        <select id="accessory-picture-select">
+          <option value="null">Preview Accessory</option>
+            {% for accessorypicture in accessorypicture_objects %}
+            <option data-id="{{accessorypicture.id}}" value="{{ accessorypicture.picture }}">{{ accessorypicture.name }} </option>
+            {% endfor %}
+        </select>
+        <br>
+        <br>
+        <button type="button" id="button-rename-accessory">Rename Selected Accessory</button>
+        <div class="recycle-bin">
+            <img class="recycle-bin" src={% static "house/images/recycle_bin.png" %} alt="Recycle Bin"/>
+        </div>
+      </div>
+
+      <div id="accessory-preview-box">
+        Accessory Preview
+        <button type="button" id="button-new-accessory">Create New Accessory</button>
+      </div>
+    </div>
+
     <div id="left-sidebar">
       <br>
       Select a working doll:
@@ -86,28 +109,6 @@
     {% endfor %}
   </div>
 
-    <div id="right-sidebar">
-      <div id="right-sidebar-top">
-        Select an accessory to preview:
-        <select id="accessory-picture-select">
-          <option value="null">Preview Accessory</option>
-            {% for accessorypicture in accessorypicture_objects %}
-            <option data-id="{{accessorypicture.id}}" value="{{ accessorypicture.picture }}">{{ accessorypicture.name }} </option>
-            {% endfor %}
-        </select>
-        <br>
-        <br>
-        <button type="button" id="button-rename-accessory">Rename Selected Accessory</button>
-        <div id="recycle-bin">
-            <img src={% static "house/images/recycle_bin.png" %} alt="Recycle Bin"/>
-        </div>
-      </div>
-
-      <div id="accessory-preview-box">
-        Accessory Preview
-        <button type="button" id="button-new-accessory">Create New Accessory</button>
-      </div>
-    </div>
   </div>
 
   </body>

@@ -34,10 +34,10 @@ html {
 
 .accessorycontainer {
     position:absolute;
+    z-index:1;
 }
 
 .accessory {
-    z-index:1;
 }
 
 .grabbable {
@@ -62,7 +62,7 @@ html {
 #banner {
     font-size:200%;
     width:100%;
-    height:4%;
+    height:6%;
     background-color:black;
     color:white;
     margin:0;
@@ -72,8 +72,8 @@ html {
 #left-sidebar {
     position:relative;
     float:left;
-    width:11%;
-    height:96%;
+    width:140px;
+    height:94%;
     background-color:black;
     color:white;
     margin:0;
@@ -99,8 +99,8 @@ html {
 #display-area {
     position:relative;
     float:left;
-    width:78%;
-    height:96%;
+    width:calc(100% - 280px);
+    height:94%;
     margin:0;
     padding:0;
 }
@@ -130,18 +130,19 @@ html {
 
 #right-sidebar {
     position:relative;
-    z-index:-1;
+    z-index:0;
     float:right;
-    width:11%;
-    height:96%;
+    width:140px;
+    height:94%;
     background-color:black;
     color:white;
     margin:0;
 }
 
-#recycle-bin {
-    width:auto;
-    height:auto;
+.recycle-bin {
+    margin-top:10px;
+    width:100%;
+    height:100%;
 }
 
 #accessory-preview-box {
