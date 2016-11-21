@@ -127,4 +127,30 @@ $(document).ready(function() {
         offset_x = (Number(mouse_x) - Number(draggeditem.offsetLeft))
         offset_y = (Number(mouse_y) - Number(draggeditem.offsetTop))
     });
-})
+
+    //rename dollhouse
+    $("#rename-dollhouse").click(function() {
+        var dollhouseid = workingDollhouse;
+        var newdollhousename = prompt("Please enter a new name for this Dollhouse. Page will reload.");
+        if(newdollhousename != null){
+          $.ajax("http://127.0.0.1:8000/dollhouseupdate/"+dollhouseid, {
+              type: 'POST',
+              data: {
+                  dollhouse_name: newdollhousename,
+              }
+          })
+          .done(function(response){
+              console.log("The request is complete!");
+              console.log(response);
+          })
+          .fail(function() {
+              console.log("Sorry, there was a problem!");
+          })
+          window.location.reload(true);
+        };
+    });
+
+
+
+
+});

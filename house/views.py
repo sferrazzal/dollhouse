@@ -78,6 +78,21 @@ def accessory(request, accessoryid):
             workingaccessory.save()
             return HttpResponse("Accessory {} saved!".format(workingaccessory.accessory_name))
 
+def dollhouseupdate(request, dollhouseid):
+    if request.method == 'POST':
+        workingdollhouse = Dollhouse.objects.get(id=dollhouseid)
+        if request.POST.get('erase') == "true":
+            workingdollhouse.delete()
+            return HttpResponse("Dollhouse deleted!")
+        else:
+            data = (request.POST).dict()
+            for key, value in data.items():
+                setattr(workingdollhouse, key, value)
+            workingdollhouse.save()
+            return HttpResponse("Dollhouse {} saved!".format(workingdollhouse.dollhouse_name))
+
+
+
 def dollcreate(request):
     if request.method == 'POST':
         doll_name = request.POST.get('dollName')
