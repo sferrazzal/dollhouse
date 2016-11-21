@@ -17,7 +17,6 @@ $(document).ready(function(){
   var previewedDoll = null;
   var $accessories = $("img[data-linkeddoll]");
   var workingDoll = null;
-  var inrecyclebin = false;
 
 
 

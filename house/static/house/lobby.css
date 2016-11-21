@@ -3,12 +3,33 @@ body {
     margin:0;
 }
 
-a:link {
+a {
+   margin:5px;
+   margin-bottom:5px;
+   margin-top:5px;
    color:white;
 }
 
 a:visited {
+    margin:5px;
     color:red;
+}
+
+button {
+    margin:5px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+#sidebar {
+    float:left;
+    height:100%;
+    width:10%;
+}
+
+#sidebar-header {
+    margin:5px;
+    color:white;
 }
   
 #banner {

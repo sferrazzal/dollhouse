@@ -10,14 +10,19 @@
         <title>Lobby</title>
         </head>
 
-        <div id="banner"><center>Welcome to the lobby! Please choose a dollhouse.</center>
+        <div id="banner"><center>Welcome to the lobby!</center>
         </div>
 
         <body>
 
+        <div id="sidebar">
+            <div id=sidebar-header>Go to a dollhouse:</div>
         {% for workingdollhouse in dollhouses %}
         <a href="{% url 'dollhouse' dollhouse=workingdollhouse.id %}">{{workingdollhouse.dollhouse_name}}</a>
         {% endfor %}
+        <button>Create New Dollhouse</button>
+        <a href="{% url 'loading_dock' %}">Go to Loading Dock</a>
+        </div>
 
         <img id="lobbyimage" src="{{MEDIA_URL}}lobby.jpg"></img>
 

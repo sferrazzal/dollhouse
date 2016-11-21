@@ -55,14 +55,17 @@ def loading_dock(request):
 def doll(request, dollid):
     if request.method == 'POST':
         workingdoll = Doll.objects.get(id=dollid)
-        data = (request.POST).dict()
-        for key, value in data.items():
-            setattr(workingdoll, key, value)
-        workingdoll.save()
-        return HttpResponse("success!")
+        if request.POST.get('erase') == "true":
+            workingdoll.delete()
+            return HttpResponse("Doll Deleted!")
+        else:
+            data = (request.POST).dict()
+            for key, value in data.items():
+                setattr(workingdoll, key, value)
+            workingdoll.save()
+            return HttpResponse("success!")
 
 def accessory(request, accessoryid):
-    debug;
     if request.method == 'POST':
         workingaccessory = Accessory.objects.get(id=accessoryid)
         if request.POST.get('erase') == "true":

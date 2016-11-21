@@ -58,10 +58,46 @@ $(document).ready(function() {
         }
     };
 
-    //on mouseup, post position of draggeditem to server and clear draggeditem
-    $(document).mouseup(function(){
+  //check if mouse cursor is in bin
+  function bincheck(e){
+      var binoffset = $(".recycle-bin").offset();
+      var binwidth = $(".recycle-bin").width();
+      var binheight = $(".recycle-bin").height();
+      if (e.clientX > binoffset.left && 
+          e.clientX < (binoffset.left + binwidth) &&
+          e.clientY > binoffset.top &&
+          e.clientY < (binoffset.top + binheight)
+          ) {
+              return true;
+          } else {
+              return false;
+          };
+  };
+
+    //on mouseup, post position of draggeditem to server and clear draggeditem (or trigger deletion if in recycle bin)
+    $(document).mouseup(function(e){
         if(draggeditem != null){
-          var dollid = draggeditem.dataset.dollid
+          var dollid = draggeditem.dataset.dollid;
+		  if(bincheck(e) != false){
+			var check = confirm("Are you sure you want to delete this doll? Page will reload.");
+			if(check == true) {
+			  $.ajax("http://127.0.0.1:8000/dollhouse/doll/"+dollid, {
+			    type: 'POST',
+			    data: {erase: 'true'
+			    }
+			  })
+            .done(function(response){
+			  console.log("The request is complete!");
+              console.log(response);
+		    })
+            .fail(function() {
+               console.log("Sorry, there was a problem!");
+               console.log(response);
+            });
+            draggeditem = null;
+            window.location.reload(true);
+            };
+          } else { 
           var lpos = draggeditem.style.left
           var tpos = draggeditem.style.top
           //data will be set using setattr(); keys must be the model field name.
@@ -81,6 +117,7 @@ $(document).ready(function() {
           })
           draggeditem = null
         };
+      };
     });
 
     //set draggeditem on mousedown and set offsets

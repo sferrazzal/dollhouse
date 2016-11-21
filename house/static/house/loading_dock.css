@@ -6,6 +6,14 @@ html {
     margin:0;
 }
 
+a:visited {
+    color:red;
+}
+
+a {
+    margin-left:4px;
+}
+
 #banner {
     margin:0;
     font-size:200%;
@@ -45,6 +53,8 @@ html {
 }
 
 .djangoform {
+    border:1px solid red;
+    min-width:200px;
     color:white;
     width:150px;
     margin-left:15px;
