@@ -150,7 +150,27 @@ $(document).ready(function() {
         };
     });
 
-
-
-
+    //delete dollhouse
+    $("#delete-dollhouse").click(function() {
+        var dollhouseid = workingDollhouse;
+        var check1 = confirm("Are you sure you want to delete this dollhouse?");
+        var check2 = prompt("What? You really want to delete this? Then you'll have to type in 'delete'!");
+        if(check1 == true && check2 == 'delete') {
+           $.ajax("http://127.0.0.1:8000/dollhouseupdate/"+dollhouseid, {
+               type: 'POST',
+               data: {
+                   erase: 'true',
+               }
+           })
+           .done(function(response){
+               console.log("The request is complete!");
+               console.log(response);
+               window.location = "http://127.0.0.1:8000/";
+           })
+           .fail(function() {
+               console.log("Sorry, there was a problem!");
+           })
+        };
+    });
+        
 });

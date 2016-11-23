@@ -11,6 +11,9 @@ urlpatterns = [
     url(r'^dollhouse/(?P<dollhouse>[0-9]+)/dressing_room/$', 
         views.dressing_room, name='dressing_room'
     ),
+    url(r'^dollhouse/dollhousecreate/$',
+        views.dollhousecreate, name='dollhousecreate'
+    ),
     url(r'^dollhouse/doll/(?P<dollid>[0-9]+)$', views.doll, name='doll'
     ),
     url(r'^dollhouse/accessory/(?P<accessoryid>[0-9]+)$', 

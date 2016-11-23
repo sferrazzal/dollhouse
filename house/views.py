@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.http import HttpResponse
+from .models import User
 from .models import Background 
 from .models import Doll
 from .models import Dollhouse
@@ -32,20 +33,9 @@ def loading_dock(request):
                     }
         cls = FormDict[FormType]
         form = cls(request.POST, request.FILES)
-        print("matched class {}!".format(cls))
 
-
-    #print("formtype = {}!".format(FormType))
-    #for cls in (DollPictureForm, AccessoryPictureForm, BackgroundForm):
-    #    print("checking {}!".format(cls))
-    #    if cls.formtype == FormType:
-    #        form = cls(request.POST, request.FILES)
-    #        print("matched formtype {}!".format(cls))
-    #        break
-    #if request.method == 'POST':
         if form.is_valid():
             form.save()
-        else: print("it's not valid!")
     accessoryform = AccessoryPictureForm()
     dollform = DollPictureForm()
     backgroundform = BackgroundForm()
@@ -91,6 +81,16 @@ def dollhouseupdate(request, dollhouseid):
             workingdollhouse.save()
             return HttpResponse("Dollhouse {} saved!".format(workingdollhouse.dollhouse_name))
 
+def dollhousecreate(request):
+    if request.method == 'POST':
+        d = Dollhouse()
+        d.dollhouse_name = request.POST.get('dollhouse_name')
+        #fixme: Need to implement users
+        d.user = User.objects.get(id=1)
+        #default background should be ok since background can be changed easily
+        d.dh_background = Background.objects.get(id=1)
+        d.save()
+        return HttpResponse("Dollhouse Created!")
 
 
 def dollcreate(request):

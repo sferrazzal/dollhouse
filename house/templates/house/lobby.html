@@ -19,10 +19,13 @@
             <div id=sidebar-header>Go to a dollhouse:</div>
         {% for workingdollhouse in dollhouses %}
         <a href="{% url 'dollhouse' dollhouse=workingdollhouse.id %}">{{workingdollhouse.dollhouse_name}}</a>
+        <br>
         {% endfor %}
-        <button>Create New Dollhouse</button>
+        <button id="create-dollhouse">Create New Dollhouse</button>
         <a href="{% url 'loading_dock' %}">Go to Loading Dock</a>
+        <br>
         </div>
+        <br>
 
         <img id="lobbyimage" src="{{MEDIA_URL}}lobby.jpg"></img>
 
