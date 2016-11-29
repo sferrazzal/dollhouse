@@ -54,10 +54,10 @@ $(document).ready(function(){
 
   //Show doll image and linked accessories based on user selection
   dollSelectMenu.onchange=function(){
+    var selectedDollID = this.value;
     if (dollSelectMenu.selectedIndex != 0) {
       $("img[data-dollid]").addClass("hide").removeClass("doll");
       $("img[data-linkeddoll]").addClass("hide").removeClass("accessory");
-      var selectedDollID = dollSelectMenu.selectedIndex;
       workingDoll = $("[data-dollid~='" + selectedDollID + "']")[0];
       workingDoll.className = "doll";
       //set linked accessories to visible
@@ -287,9 +287,7 @@ $(document).ready(function(){
         var check = confirm("Are you sure you want to delete this accessory? Page will reload.");
             if(check == true) {
               $.ajax("http://127.0.0.1:8000/dollhouse/accessory/"+accessoryid, {
-                type: 'POST',
-                data: {erase: 'true'
-                }
+                type: 'DELETE'
               })
             .done(function(response){
               console.log("The request is complete!" );

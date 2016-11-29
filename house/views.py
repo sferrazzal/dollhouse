@@ -43,43 +43,40 @@ def loading_dock(request):
     return render(request, 'house/loading_dock.html', context)
 
 def doll(request, dollid):
-    if request.method == 'POST':
-        workingdoll = Doll.objects.get(id=dollid)
-        if request.POST.get('erase') == "true":
-            workingdoll.delete()
-            return HttpResponse("Doll Deleted!")
-        else:
-            data = (request.POST).dict()
-            for key, value in data.items():
-                setattr(workingdoll, key, value)
-            workingdoll.save()
-            return HttpResponse("success!")
+    workingdoll = Doll.objects.get(id=dollid)
+    if request.method == 'DELETE':
+        workingdoll.delete()
+        return HttpResponse("Doll Deleted!")
+    elif request.method == 'POST':
+        data = (request.POST).dict()
+        for key, value in data.items():
+            setattr(workingdoll, key, value)
+        workingdoll.save()
+        return HttpResponse("success!")
 
 def accessory(request, accessoryid):
-    if request.method == 'POST':
-        workingaccessory = Accessory.objects.get(id=accessoryid)
-        if request.POST.get('erase') == "true":
-            workingaccessory.delete()
-            return HttpResponse("Accessory deleted!")
-        else:
-            data = (request.POST).dict()
-            for key, value in data.items():
-                setattr(workingaccessory, key, value)
-            workingaccessory.save()
-            return HttpResponse("Accessory {} saved!".format(workingaccessory.accessory_name))
+    workingaccessory = Accessory.objects.get(id=accessoryid)
+    if request.method == 'DELETE':
+        workingaccessory.delete()
+        return HttpResponse("Accessory deleted!")
+    elif request.method == 'POST':
+        data = (request.POST).dict()
+        for key, value in data.items():
+            setattr(workingaccessory, key, value)
+        workingaccessory.save()
+        return HttpResponse("Accessory {} saved!".format(workingaccessory.accessory_name))
 
 def dollhouseupdate(request, dollhouseid):
-    if request.method == 'POST':
-        workingdollhouse = Dollhouse.objects.get(id=dollhouseid)
-        if request.POST.get('erase') == "true":
-            workingdollhouse.delete()
-            return HttpResponse("Dollhouse deleted!")
-        else:
-            data = (request.POST).dict()
-            for key, value in data.items():
-                setattr(workingdollhouse, key, value)
-            workingdollhouse.save()
-            return HttpResponse("Dollhouse {} saved!".format(workingdollhouse.dollhouse_name))
+    workingdollhouse = Dollhouse.objects.get(id=dollhouseid)
+    if request.method == 'DELETE':
+        workingdollhouse.delete()
+        return HttpResponse("Dollhouse deleted!")
+    elif request.method == 'POST':
+        data = (request.POST).dict()
+        for key, value in data.items():
+            setattr(workingdollhouse, key, value)
+        workingdollhouse.save()
+        return HttpResponse("Dollhouse {} saved!".format(workingdollhouse.dollhouse_name))
 
 def dollhousecreate(request):
     if request.method == 'POST':

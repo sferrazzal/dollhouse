@@ -82,9 +82,7 @@ $(document).ready(function() {
 			var check = confirm("Are you sure you want to delete this doll? Page will reload.");
 			if(check == true) {
 			  $.ajax("http://127.0.0.1:8000/dollhouse/doll/"+dollid, {
-			    type: 'POST',
-			    data: {erase: 'true'
-			    }
+			    type: 'DELETE'
 			  })
             .done(function(response){
 			  console.log("The request is complete!");
@@ -150,6 +148,29 @@ $(document).ready(function() {
         };
     });
 
+    //change dollhouse background
+    $("#background-select").change(function() {
+        if($("#background-select").val() != null) {
+            var dollhouseid = workingDollhouse;
+            var dh_background = $("#background-select").val()
+            console.log("changing background to " + dh_background);
+            $.ajax("http://127.0.0.1:8000/dollhouseupdate/"+dollhouseid, {
+                type: 'POST',
+                data: {
+                    dh_background_id: dh_background,
+                }
+            })
+            .done(function(response){
+               console.log("The request is complete!");
+               console.log(response);
+               window.location.reload(true);
+           })
+           .fail(function() {
+               console.log("Sorry, there was a problem!");
+           })
+        };
+    });
+
     //delete dollhouse
     $("#delete-dollhouse").click(function() {
         var dollhouseid = workingDollhouse;
@@ -157,10 +178,7 @@ $(document).ready(function() {
         var check2 = prompt("What? You really want to delete this? Then you'll have to type in 'delete'!");
         if(check1 == true && check2 == 'delete') {
            $.ajax("http://127.0.0.1:8000/dollhouseupdate/"+dollhouseid, {
-               type: 'POST',
-               data: {
-                   erase: 'true',
-               }
+               type: 'DELETE'
            })
            .done(function(response){
                console.log("The request is complete!");

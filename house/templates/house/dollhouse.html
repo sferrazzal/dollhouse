@@ -18,7 +18,7 @@ var workingDollhouse = {{workingdollhouse.id}}
         <select id="background-select">
           <option value="null">Change Background</option>
             {% for background in background_objects %}
-            <option value="{{ background.bg_name}}">{{ background.bg_name }} </option>
+            <option value="{{ background.id }}">{{ background.bg_name }} </option>
             {% endfor %}
         </select>
 		<button id="delete-dollhouse">Delete Dollhouse</button>
