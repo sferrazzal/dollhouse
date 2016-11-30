@@ -82,8 +82,6 @@ def dollhousecreate(request):
     if request.method == 'POST':
         d = Dollhouse()
         d.dollhouse_name = request.POST.get('dollhouse_name')
-        #fixme: Need to implement users
-        d.user = User.objects.get(id=1)
         #default background should be ok since background can be changed easily
         d.dh_background = Background.objects.get(id=1)
         d.save()
