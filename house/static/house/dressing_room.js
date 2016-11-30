@@ -153,7 +153,7 @@ $(document).ready(function(){
       })
       .done(function(response){
           console.log("The request is complete!");
-          alert("accessory created! Page will reload.");
+          alert("Doll created! Page will reload.");
           window.location.reload(true);
       })
       .fail(function(response){
@@ -182,7 +182,7 @@ $(document).ready(function(){
         })
         .done(function(response){
           console.log("The request is complete!");
-          alert("accessory created! Page will reload.");
+          alert("Accessory created! Page will reload.");
           window.location.reload(true);
         })
         .fail(function(jqXHR, textStatus, errorThrown){
