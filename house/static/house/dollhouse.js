@@ -81,7 +81,7 @@ $(document).ready(function() {
 		  if(bincheck(e) != false){
 			var check = confirm("Are you sure you want to delete this doll? Page will reload.");
 			if(check == true) {
-			  $.ajax("http://127.0.0.1:8000/dollhouse/doll/"+dollid, {
+			  $.ajax("/dollhouse/doll/"+dollid, {
 			    type: 'DELETE'
 			  })
             .done(function(response){
@@ -99,7 +99,7 @@ $(document).ready(function() {
           var lpos = draggeditem.style.left
           var tpos = draggeditem.style.top
           //data will be set using setattr(); keys must be the model field name.
-          $.ajax("http://127.0.0.1:8000/dollhouse/doll/"+dollid, {
+          $.ajax("/dollhouse/doll/"+dollid, {
               type: 'POST',
               data: {
                   doll_lpos: lpos,
@@ -131,7 +131,7 @@ $(document).ready(function() {
         var dollhouseid = workingDollhouse;
         var newdollhousename = prompt("Please enter a new name for this Dollhouse. Page will reload.");
         if(newdollhousename != null){
-          $.ajax("http://127.0.0.1:8000/dollhouseupdate/"+dollhouseid, {
+          $.ajax("/dollhouseupdate/"+dollhouseid, {
               type: 'POST',
               data: {
                   dollhouse_name: newdollhousename,
@@ -154,7 +154,7 @@ $(document).ready(function() {
             var dollhouseid = workingDollhouse;
             var dh_background = $("#background-select").val()
             console.log("changing background to " + dh_background);
-            $.ajax("http://127.0.0.1:8000/dollhouseupdate/"+dollhouseid, {
+            $.ajax("/dollhouseupdate/"+dollhouseid, {
                 type: 'POST',
                 data: {
                     dh_background_id: dh_background,
@@ -177,13 +177,13 @@ $(document).ready(function() {
         var check1 = confirm("Are you sure you want to delete this dollhouse?");
         var check2 = prompt("What? You really want to delete this? Then you'll have to type in 'delete'!");
         if(check1 == true && check2 == 'delete') {
-           $.ajax("http://127.0.0.1:8000/dollhouseupdate/"+dollhouseid, {
+           $.ajax("/dollhouseupdate/"+dollhouseid, {
                type: 'DELETE'
            })
            .done(function(response){
                console.log("The request is complete!");
                console.log(response);
-               window.location = "http://127.0.0.1:8000/";
+               location.reload(true);
            })
            .fail(function() {
                console.log("Sorry, there was a problem!");

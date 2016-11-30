@@ -34,7 +34,7 @@ $(document).ready(function(){
     $("#create-dollhouse").click(function() {
         var newDollhouseName = prompt("Please enter a name for the new dollhouse");
         if(newDollhouseName != null) {
-            $.ajax("http://127.0.0.1:8000/dollhouse/dollhousecreate/", {
+            $.ajax("/dollhouse/dollhousecreate/", {
                 type: 'POST',
                 data: {dollhouse_name: newDollhouseName
                 }

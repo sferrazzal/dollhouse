@@ -142,7 +142,7 @@ $(document).ready(function(){
   newDollButton.onclick = function(){
     if (dollPreviewMenu.selectedIndex != 0) {
       var dollName = prompt('Please enter a name for the new doll:');
-      $.ajax("Http://127.0.0.1:8000/dollhouse/doll/create", {
+      $.ajax("/dollhouse/doll/create", {
         type: 'POST',
         dataType: 'json',
         data: {
@@ -153,6 +153,8 @@ $(document).ready(function(){
       })
       .done(function(response){
           console.log("The request is complete!");
+          alert("accessory created! Page will reload.");
+          window.location.reload(true);
       })
       .fail(function(response){
           console.log("Sorry, there was a problem!");
@@ -169,7 +171,7 @@ $(document).ready(function(){
       accessoryImage = accessoryPreviewMenu.options[accessoryPreviewMenu.selectedIndex].value;
         doll = dollSelectMenu.options[dollSelectMenu.selectedIndex].value;
         console.log(doll);
-        $.ajax("Http://127.0.0.1:8000/dollhouse/accessory/create", {
+        $.ajax("/dollhouse/accessory/create", {
           type: 'POST',
           data: {
             accessoryName: accessoryName,
@@ -181,6 +183,7 @@ $(document).ready(function(){
         .done(function(response){
           console.log("The request is complete!");
           alert("accessory created! Page will reload.");
+          window.location.reload(true);
         })
         .fail(function(jqXHR, textStatus, errorThrown){
           console.log("Sorry, there was a problem!");
@@ -188,7 +191,6 @@ $(document).ready(function(){
           console.log("jqXHR=" + jqXHR);
           console.log("textStatus=" + textStatus);
         });
-        window.location.reload(true);
       } else {
           alert("Please select a doll!");
       };
@@ -206,7 +208,7 @@ $(document).ready(function(){
       var dollName = prompt('Please enter a new name for this doll (page will be reloaded):');
       if (dollName != null) {
         // data will be set using setattr(); keys must be the model field name.
-        $.ajax("Http://127.0.0.1:8000/dollhouse/doll/"+dollId,{
+        $.ajax("/dollhouse/doll/"+dollId,{
           type: 'POST',
           data: {
             doll_name: dollName,
@@ -286,7 +288,7 @@ $(document).ready(function(){
       if(bincheck(e) != false){
         var check = confirm("Are you sure you want to delete this accessory? Page will reload.");
             if(check == true) {
-              $.ajax("http://127.0.0.1:8000/dollhouse/accessory/"+accessoryid, {
+              $.ajax("/dollhouse/accessory/"+accessoryid, {
                 type: 'DELETE'
               })
             .done(function(response){
@@ -304,7 +306,7 @@ $(document).ready(function(){
           var accessory_tpos = draggeditem.style.top
           console.log("POSTing with accid = " + accessoryid + ", acclpos = " + accessory_lpos + ", acctpos = " + accessory_tpos);
           //data will be set using setattr(); keys must be the model field name.
-          $.ajax("http://127.0.0.1:8000/dollhouse/accessory/"+accessoryid, {
+          $.ajax("/dollhouse/accessory/"+accessoryid, {
             type: 'POST',
             data: {
               accessory_lpos: accessory_lpos,
