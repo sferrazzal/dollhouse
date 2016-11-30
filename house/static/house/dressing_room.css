@@ -30,6 +30,14 @@ a:visited {
     text-align:center;
 }
 
+#button-rename-doll {
+    margin-bottom:5px;
+}
+
+.text {
+    margin-bottom:5px;
+}
+
 .hide {
     display: none;
 }
@@ -58,7 +66,9 @@ a:visited {
     cursor:grab;
 }
 
-
+#doll-select {
+    margin-bottom:5px;
+}
 
 #container {
     position:absolute;
@@ -94,6 +104,10 @@ a:visited {
 #doll-picture-select {
     position:relative;
     bottom:0;
+}
+
+#accessory-picture-select {
+    margin-bottom:5px;
 }
 
 #doll-preview-box {

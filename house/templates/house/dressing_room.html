@@ -22,15 +22,13 @@
 
     <div id="right-sidebar">
       <div id="right-sidebar-top">
-        Select an accessory to preview:
+        <div class="text">Select an accessory to preview:</div>
         <select id="accessory-picture-select">
           <option value="null">Preview Accessory</option>
             {% for accessorypicture in accessorypicture_objects %}
             <option data-id="{{accessorypicture.id}}" value="{{ accessorypicture.picture }}">{{ accessorypicture.name }} </option>
             {% endfor %}
         </select>
-        <br>
-        <br>
         <button type="button" id="button-rename-accessory">Rename Selected Accessory</button>
         <div class="recycle-bin">
             <img class="recycle-bin" src={% static "house/images/recycle_bin.png" %} alt="Recycle Bin"/>
@@ -38,27 +36,21 @@
       </div>
 
       <div id="accessory-preview-box">
-        Accessory Preview
+        <div class="text">Accessory Preview</div>
         <button type="button" id="button-new-accessory">Create New Accessory</button>
       </div>
     </div>
 
     <div id="left-sidebar">
-      <br>
-      Select a working doll:
-      <br>
+      <div class="text">Select a working doll:</div>
       <select id="doll-select">
         <option value="null">Select Doll</option>
           {% for doll in doll_objects %}
             <option value="{{ doll.id }}">{{ doll.doll_name }} </option>
           {% endfor %}
       </select>
-      <br>
-      <br>
       <button type="button" id="button-rename-doll">Rename Selected Doll</button>
-      <br>
-      <br>
-      Select a doll to preview:
+      <div class="text">Select a doll to preview:</div>
         <select id="doll-picture-select">
           <option value="null">Preview Doll</option>
           {% for dollpicture in dollpicture_objects %}
@@ -68,14 +60,13 @@
 
 
       <div id="doll-preview-box">
-        Doll Preview
+        <div class="text">Doll Preview</div>
         <button type="button" id="button-new-doll">Create New Doll</button>
       </div>
  
     </div>
 
-  <div id="display-area">
-    <img 
+  <div id="display-area"><img 
     id="curtains" 
     src ={% static "house/images/curtains.jpg" %} 
     alt="curtains"
@@ -108,8 +99,6 @@
     </div>
     {% endfor %}
   </div>
-
   </div>
-
   </body>
 </html>

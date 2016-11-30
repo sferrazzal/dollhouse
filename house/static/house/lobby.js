@@ -42,11 +42,11 @@ $(document).ready(function(){
             .done(function(response) {
                 console.log("The request is complete!");
                 console.log(response);
+                window.location.reload(true);
             })
             .fail(function() {
                 console.log("Sorry, there was a problem!");
             })
-            //window.location.reload(true);
         };
     });
 
