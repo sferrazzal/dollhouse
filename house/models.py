@@ -13,7 +13,6 @@ class Background(models.Model):
  
 class Dollhouse(models.Model):
     dollhouse_name = models.CharField(max_length=100)
-    user = models.ForeignKey(User)
     dh_background = models.ForeignKey(Background)
     def __str__(self):
         return self.dollhouse_name
