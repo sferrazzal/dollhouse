@@ -183,7 +183,7 @@ $(document).ready(function() {
            .done(function(response){
                console.log("The request is complete!");
                console.log(response);
-               location.reload(true);
+               window.location.href = '/';
            })
            .fail(function() {
                console.log("Sorry, there was a problem!");
