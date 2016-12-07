@@ -19,6 +19,9 @@ urlpatterns = [
     url(r'^dollhouse/accessory/(?P<accessoryid>[0-9]+)$', 
         views.accessory, name='accessory'
     ),
+    url(r'^dollhouse/accessorypicture/(?P<accessorypictureid>[0-9]+)$', 
+        views.accessorypicture, name='accessorypicture'
+    ),
     url(r'^dollhouseupdate/(?P<dollhouseid>[0-9]+)$',
         views.dollhouseupdate, name='dollhouseupdate'
     ),

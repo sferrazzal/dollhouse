@@ -51,9 +51,10 @@ $(document).ready(function(){
       }
   });
   //end csrftoken setup
+  
 
   //Show doll image and linked accessories based on user selection
-  dollSelectMenu.onchange=function(){
+  $("#doll-select").change(function(){
     var selectedDollID = this.value;
     if (dollSelectMenu.selectedIndex != 0) {
       $("img[data-dollid]").addClass("hide").removeClass("doll");
@@ -67,46 +68,46 @@ $(document).ready(function(){
       $("img[data-linkeddoll]").addClass("hide").removeClass("accessory");
       workingDoll = null;
     };
-  };
+  });
 
 
   //Set and position doll preview based on user selection
-  dollPreviewMenu.onchange=function(){
+  $("#doll-picture-select").change(function(){
     if (dollPreviewMenu.selectedIndex != 0) {
       selectedDollPath = mediaUrl + dollPreviewMenu.options[dollPreviewMenu.selectedIndex].getAttribute('data-picture');
-      console.log("selectedDollPath = " + selectedDollPath);
-      console.log("selectedDollIndex = " + dollPreviewMenu.selectedIndex);
+      //console.log("selectedDollPath = " + selectedDollPath);
+      //console.log("selectedDollIndex = " + dollPreviewMenu.selectedIndex);
         if (dollPreview.src == "") {
           dollPreview.src = selectedDollPath;
           $(dollPreview).load(function() {
             $( "#doll-preview-box" ).append(dollPreview);
             if (dollPreview.clientHeight > dollPreviewBox.clientHeight) {
-              console.log("Resizing vertically!");
+              //console.log("Resizing vertically!");
               dollPreview.height = (dollPreviewBox.clientHeight - 10);
             };
             if (dollPreview.clientWidth > dollPreviewBox.clientWidth) {
-              console.log("Resizing horizontally!");
+              //console.log("Resizing horizontally!");
               dollPreview.width = (dollPreviewBox.clientWidth - 10); 
             };
           });
      } else {
           dollPreview.src = selectedDollPath;
         if (dollPreview.clientHeight > dollPreviewBox.clientHeight) {
-          console.log("Resizing vertically!");
+          //console.log("Resizing vertically!");
           dollPreview.height = (dollPreviewBox.clientHeight - 10);
         };
         if (dollPreview.width > dollPreviewBox.clientWidth) {
-          console.log("Resizing horizontally!");
+          //console.log("Resizing horizontally!");
           dollPreview.width = (dollPreviewBox.clientWidth- 10);
         };
       };
-      console.log("Height = " + dollPreview.clientHeight);
-      console.log("Width = " + dollPreview.clientWidth);
+      //console.log("Height = " + dollPreview.clientHeight);
+      //console.log("Width = " + dollPreview.clientWidth);
     };
-  };
+  });
 
   //Set and position accessory preview based on user selection
-  accessoryPreviewMenu.onchange=function(){
+  $("#accessory-picture-select").change(function(){
     if (accessoryPreviewMenu.selectedIndex != 0) {
       selectedAccessoryPath = mediaUrl + accessoryPreviewMenu.options[accessoryPreviewMenu.selectedIndex].value;
         if (accessoryPreview.src == "") {
@@ -114,57 +115,59 @@ $(document).ready(function(){
           $(accessoryPreview).load(function() {
             $( "#accessory-preview-box" ).append(accessoryPreview);
             if (accessoryPreview.clientHeight > accessoryPreviewBox.clientHeight) {
-              console.log("Resizing vertically!");
+              //console.log("Resizing vertically!");
               accessoryPreview.height = (accessoryPreviewBox.clientHeight - 10);
             };
             if (accessoryPreview.clientWidth > accessoryPreviewBox.clientWidth) {
-              console.log("Resizing horizontally!");
+              //console.log("Resizing horizontally!");
               accessoryPreview.width = (accessoryPreviewBox.clientWidth - 10); 
             };
           });
      } else {
          accessoryPreview.src = selectedAccessoryPath;
        if (accessoryPreview.clientHeight > accessoryPreviewBox.clientHeight) {
-         console.log("Resizing vertically!");
+         //console.log("Resizing vertically!");
          accessoryPreview.height = (accessoryPreviewBox.clientHeight - 10);
        };
        if (accessoryPreview.width > accessoryPreviewBox.clientWidth) {
-         console.log("Resizing horizontally!");
+         //console.log("Resizing horizontally!");
          accessoryPreview.width = (accessoryPreviewBox.clientWidth- 10);
        };
      };
-      console.log("Height = " + accessoryPreview.clientHeight);
-      console.log("Width = " + accessoryPreview.clientWidth);
+      //console.log("Height = " + accessoryPreview.clientHeight);
+      //console.log("Width = " + accessoryPreview.clientWidth);
     };
-  };
+  });
 
   //Create new doll from preview image
-  newDollButton.onclick = function(){
+  $("#button-new-doll").click(function(){
     if (dollPreviewMenu.selectedIndex != 0) {
       var dollName = prompt('Please enter a name for the new doll:');
-      $.ajax("/dollhouse/doll/create", {
-        type: 'POST',
-        dataType: 'json',
-        data: {
-          dollName: dollName,
-          dollImage: dollPreviewMenu.options[dollPreviewMenu.selectedIndex].getAttribute('data-picture'),
-          workingDollhouse: workingDollhouse, 
-        }
-      })
-      .done(function(response){
-          console.log("The request is complete!");
-          alert("Doll created! Page will reload.");
-          window.location.reload(true);
-      })
-      .fail(function(response){
-          console.log("Sorry, there was a problem!");
-          console.log(response.responseText);
-      });
+      if (dollname != null) {
+        $.ajax("/dollhouse/doll/create", {
+          type: 'POST',
+          dataType: 'json',
+          data: {
+            dollName: dollName,
+            dollImage: dollPreviewMenu.options[dollPreviewMenu.selectedIndex].getAttribute('data-picture'),
+            workingDollhouse: workingDollhouse, 
+          }
+        })
+        .done(function(response){
+            console.log("The request is complete!");
+            alert("Doll created! Page will reload.");
+            window.location.reload(true);
+        })
+        .fail(function(response){
+            console.log("Sorry, there was a problem!");
+            console.log(response.responseText);
+        });
+      };
     };
-  };
+  });
 
   //Create new accessory from preview image
-  newAccessoryButton.onclick = function(){
+  $("#button-new-accessory").click(function(){
     if (accessoryPreviewMenu.selectedIndex != 0) {
       if (dollSelectMenu.selectedIndex != 0) {
       accessoryName = accessoryPreviewMenu.options[accessoryPreviewMenu.selectedIndex].text;
@@ -197,13 +200,13 @@ $(document).ready(function(){
     } else {
         alert("Please select an accessory!");
     };
-  };
+  });
 
 
   //Rename Doll
-  renameDollButton.onclick = function(){
+  $("#button-rename-doll").click(function(){
     if (dollSelectMenu.selectedIndex != 0) {
-      var dollId = dollSelectMenu.selectedIndex;
+      var dollId = dollSelectMenu.options[dollSelectMenu.selectedIndex].value;
       console.log(dollId);
       var dollName = prompt('Please enter a new name for this doll (page will be reloaded):');
       if (dollName != null) {
@@ -217,26 +220,26 @@ $(document).ready(function(){
         window.location.reload(true);
       }; 
     };
-  };
+  });
 
   //Rename Accessory 
-  renameAccessoryButton.onclick = function(){
+  $("#button-rename-accessory").click(function(){
     if (accessoryPreviewMenu.selectedIndex != 0) {
-      var accessoryId = AccessoryPreviewMenu.selectedIndex;
-      console.log(accessoryId);
-      var name = prompt('Please enter a new name for this doll (page will be reloaded):');
+      var accessoryPictureId = accessoryPreviewMenu.options[accessoryPreviewMenu.selectedIndex].getAttribute("data-id");
+      console.log(accessoryPictureId);
+      var accessoryName = prompt('Please enter a new name for this accessory (page will be reloaded):');
       if (name != null) {
         // data will be set using setattr(); keys must be the model field name.
-        $.ajax("Http://127.0.0.1:8000/dollhouse/accessory/"+accessoryId,{
+        $.ajax("/dollhouse/accessorypicture/"+accessoryPictureId,{
           type: 'POST',
           data: {
-            name: dollName,
+            name: accessoryName,
           }
         });
         window.location.reload(true);
       }; 
     };
-  };
+  });
 
   //
   //*DRAGGING SECTION*

@@ -66,6 +66,15 @@ def accessory(request, accessoryid):
         workingaccessory.save()
         return HttpResponse("Accessory {} saved!".format(workingaccessory.accessory_name))
 
+def accessorypicture(request, accessorypictureid):
+    workingaccessory = AccessoryPicture.objects.get(id=accessorypictureid)
+    if request.method == 'POST':
+        data = (request.POST).dict()
+        for key, value in data.items():
+            setattr(workingaccessory, key, value)
+        workingaccessory.save()
+        return HttpResponse("Accessory {} saved!".format(workingaccessory.accessory_name))
+
 def dollhouseupdate(request, dollhouseid):
     workingdollhouse = Dollhouse.objects.get(id=dollhouseid)
     if request.method == 'DELETE':
